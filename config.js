@@ -1,18 +1,6 @@
+import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProperty, @SelectorProperty } from "Vigilance";
 
-import { 
-    @Vigilant, 
-    @SwitchProperty, 
-    @TextProperty, 
-    @SliderProperty, 
-    @ButtonProperty, 
-    @SelectorProperty } from "Vigilance";
-
-@Vigilant("Criticall", "Criticall", {
-    getCategoryComparator: () => (a, b) => {
-        const order = ["General", "Dungeons", "F7/M7", "HUD"];
-        return order.indexOf(a.name) - order.indexOf(b.name);
-    }
-})
+@Vigilant("Criticall", "Criticall")
 
 class Config {
     @SwitchProperty({
