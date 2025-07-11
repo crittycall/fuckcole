@@ -1,52 +1,55 @@
 import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProperty, @SelectorProperty } from "Vigilance";
 
-@Vigilant("Fuckcole", "Fuckcole")
+@Vigilant("Fuckcole", "§aFuckcole§r") // schizo color sooo cool ik
 
 class Config {
-   /////////////riftstalker/////////////
+    ///// RIFTSTALKER /////
     @SwitchProperty({
-    name: "Toggle Auto Impel",
+        name: "Toggle Auto Impel",
         description: "Enables Auto Impel",
         category: "Riftstalker",
         subcategory: "Auto Impel"
     })
-    toggleImpel = false
+    toggleImpel = false;
+
     @SwitchProperty({
-    name: "No Rotate",
-        description: "Makes autoimpel serversided (risky)",
+        name: "No Rotate",
+        description: "Makes autoimpel serversided (risky cuz crit can't code)",
         category: "Riftstalker",
         subcategory: "Auto Impel"
     })
-    noRotate = false
+    noRotate = false;
+
     @SwitchProperty({
-     name: "Auto ice",
-        description: "Automatically uses holy ice for twinclaws (doesnt 0 tick any more gg)",
+        name: "Auto ice",
+        description: "Automatically uses holy ice for twinclaws (doesnt 0 tick any more aka gives u 30d break)",
         category: "Riftstalker",
         subcategory: "Automation"
     })
-    autoice = false
-    /////////////fuckcole settings/////////////
+    autoice = false;
+
+    ///// SETTINGS /////
     @SwitchProperty({
-    name: "Shorten Prefix",
+        name: "Shorten Prefix",
         description: "Shorten prefix from fuckcole to fc",
         category: "Settings",
         subcategory: "Category"
     })
-    shortenprefix = false
+    shortenprefix = false;
+
     /////////////parakeet/////////////
    @TextProperty({
-    name: "Parakeet Message",
-        description: "Repeat any message in chat",
+        name: "Parakeet Message",
+        description: "Repeat any message in chat (This is extremly schizo idk why anyone would ever use this)",
         category: "Parakeet",
         subcategory: "Category"
     })
-   text = ""
+    parakeetMessage = "";
    
     constructor() {
         this.initialize(this);
-this.addDependency("No Rotate", "Toggle Auto Impel");
 
-
+        this.addDependency("No Rotate", "Toggle Auto Impel");
     }
 }
 

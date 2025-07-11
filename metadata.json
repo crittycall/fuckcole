@@ -3,5 +3,6 @@
   "creator": "crit11, jcnlk",
   "description": "cheating (jcnlk was here)",
   "version": "1.0.0",
-  "entry": "index.js"
+  "entry": "index.js",
+  "requires": ["tska", "Vigilance"]
 }

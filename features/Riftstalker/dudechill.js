@@ -1,17 +1,24 @@
-import { leftClick, rightClick, sendMsg, swapToItem, } from "../../utils/utils";
+import { rightClick, sendMsg, swapToItem } from "../../utils/utils";
 import { Keybind } from "../../../tska/shared/Keybind";
 
-function lfice() {
-const lastitem = Player.getHeldItemIndex()
-swapToItem("fishing rod")
-Client.scheduleTask(2,()=> {
-    rightClick()
-    sendMsg("clicked")
-})
-Client.scheduleTask(3, ()=>{
-    Player.setHeldItemIndex(lastitem)
-    sendMsg(lastitem)
-})
+/**
+ * why dudechill.js wtf pls
+ */
+
+function autoIce() {
+  const lastitem = Player.getHeldItemIndex();
+  swapToItem("fishing rod"); // REPLACE NAME LATER !!!
+  Client.scheduleTask(2, () => {
+    rightClick();
+    sendMsg("clicked"); // debug
+  });
+  Client.scheduleTask(3, () => {
+    Player.setHeldItemIndex(lastitem);
+    sendMsg(lastitem); // debug
+  });
 }
 
-new Keybind("lfitem", Keyboard.KEY_NONE, "lfitem").registerKeyPress(() => lfice());
+/**
+ * Stop using schizo keybinds to test your stuff
+ */
+new Keybind("lfitem", Keyboard.KEY_NONE, "lfitem").registerKeyPress(() => autoIce());

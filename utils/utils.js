@@ -1,22 +1,18 @@
-// 99% (realistically 100%) of this is liberated from jcnlkclient!! thanks jc for letting me be a skid <3
-const KeyBinding = Java.type("net.minecraft.client.settings.KeyBinding");
+/**
+ * 99% (realistically 100%) of this is liberated from jcnlkclient!! thanks jc for letting me be a skid <3
+ * 
+ * This is so schizo omg pls kill me crit
+ */
+
 import config from "../config";
 
-
-const bezier = (t, initial, p1, p2, final) => ((1 - t) * (1 - t) * (1 - t) * initial + 3 * (1 - t) * (1 - t) * t * p1 + 3 * (1 - t) * t * t * p2 + t * t * t * final); 
-export const prefix = config.shortenprefix ? "§f[§aFC§f] §r" : "§f[§afuckcole§f] §r"
-export const sendMsg = (msg) => ChatLib.chat(prefix + msg)
-export const C02PacketUseEntity = Java.type("net.minecraft.network.play.client.C02PacketUseEntity")
-//export const parakeetMsg = config.parakeetMsg ? 
-
-
-
-
-
-
-
-
-//////////functions//////////
+export const bezier = (t, initial, p1, p2, final) => (1 - t) * (1 - t) * (1 - t) * initial + 3 * (1 - t) * (1 - t) * t * p1 + 3 * (1 - t) * t * t * p2 + t * t * t * final;
+export const setSneakKey = (state) => KeyBinding.func_74510_a(Client.getMinecraft().field_71474_y.field_74311_E.func_151463_i(), state);
+export const C02PacketUseEntity = Java.type("net.minecraft.network.play.client.C02PacketUseEntity");
+export const prefix = config.shortenprefix ? "§f[§aFC§f] §r" : "§f[§afuckcole§f] §r";
+export const Jump = new KeyBind(Client.getMinecraft().field_71474_y.field_74314_A);
+export const KeyBinding = Java.type("net.minecraft.client.settings.KeyBinding");
+export const sendMsg = (msg) => ChatLib.chat(prefix + msg);
 
 export function leftClick() {
   const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null);
@@ -28,8 +24,7 @@ export function rightClick() {
   const rightClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147121_ag", null);
   rightClickMethod.setAccessible(true);
   rightClickMethod.invoke(Client.getMinecraft(), null);
-} 
-
+}
 
 export function rotate(yaw, pitch) {
   if (Number.isNaN(yaw) || Number.isNaN(pitch)) return;
@@ -38,20 +33,14 @@ export function rotate(yaw, pitch) {
   player.field_70125_A = pitch;
 }
 
-export const setSneakKey = (state) => KeyBinding.func_74510_a(Client.getMinecraft().field_71474_y.field_74311_E.func_151463_i(), state);
-export const Jump = new KeyBind(Client.getMinecraft().field_71474_y.field_74314_A);
-
 export function doJump() {
-    Jump.setState(true)
-    Client.scheduleTask(2, () =>{
-        Jump.setState(false)
-    })
+  Jump.setState(true);
+  Client.scheduleTask(2, () => Jump.setState(false));
 }
+
 export const swapToItem = (targetItemName) => {
   if (Player.getHeldItem()?.includes(targetItemName)) return;
-  const itemSlot = Player?.getInventory()?.getItems()?.findIndex((item) => {
-    return item?.getName()?.toLowerCase()?.includes(targetItemName.toLowerCase());
-  });
+  const itemSlot = Player?.getInventory()?.getItems()?.findIndex((item) => item?.getName()?.toLowerCase()?.includes(targetItemName.toLowerCase()));
   if (itemSlot === -1 || itemSlot > 7) {
     ChatLib.chat(`&cUnable to find &6${targetItemName}&c in your hotbar`);
     return;
