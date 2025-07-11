@@ -43,7 +43,7 @@ register("packetReceived", (packet, event) => {
 
 }).setFilteredClass(Java.type("net.minecraft.network.play.server.S45PacketTitle"));
 
-///doing the thing///
+///doing the ban packet///
 
 function impelv2(yaw, pitch) {
   serverRotations.setRotation(yaw, pitch, () => {

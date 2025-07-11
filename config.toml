@@ -1,0 +1,7 @@
+
+[riftstalker]
+
+	[riftstalker.category]
+		auto_ice = true
+		auto_impel = true
+
