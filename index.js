@@ -6,3 +6,4 @@ import { sendMsg } from "./utils/utils";
 
 register("command", () => config.openGUI()).setName("fuckcole").setAliases("fc");
 register("gameLoad", () => sendMsg("&ait didnt fail loading ggwp"));
+

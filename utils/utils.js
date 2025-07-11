@@ -1,7 +1,22 @@
 // 99% (realistically 100%) of this is liberated from jcnlkclient!! thanks jc for letting me be a skid <3
 const KeyBinding = Java.type("net.minecraft.client.settings.KeyBinding");
-export const prefix = ("§f[§afuckcole§f] ")
+import config from "../config";
+
+
+const bezier = (t, initial, p1, p2, final) => ((1 - t) * (1 - t) * (1 - t) * initial + 3 * (1 - t) * (1 - t) * t * p1 + 3 * (1 - t) * t * t * p2 + t * t * t * final); 
+export const prefix = config.shortenprefix ? "§f[§aFC§f] §r" : "§f[§afuckcole§f] §r"
 export const sendMsg = (msg) => ChatLib.chat(prefix + msg)
+export const C02PacketUseEntity = Java.type("net.minecraft.network.play.client.C02PacketUseEntity")
+//export const parakeetMsg = config.parakeetMsg ? 
+
+
+
+
+
+
+
+
+//////////functions//////////
 
 export function leftClick() {
   const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null);
@@ -45,3 +60,17 @@ export const swapToItem = (targetItemName) => {
     Player.setHeldItemIndex(itemSlot);
   }
 };
+
+export function rotateSmoothly(yaw, pitch, time) {
+  while (yaw >= 180) yaw -= 360;
+  while (pitch >= 180) pitch -= 360;
+  const initialYaw = Player.getYaw();
+  const initialPitch = Player.getPitch();
+  const initialTime = Date.now();
+  const trigger = register("step", () => {
+    const progress = time <= 0 ? 1 : Math.max(Math.min((Date.now() - initialTime) / time, 1), 0);
+    const amount = bezier(progress, 0, 1, 1, 1);
+    rotate(initialYaw + (yaw - initialYaw) * amount, initialPitch + (pitch - initialPitch) * amount);
+    if (progress >= 1) trigger.unregister();
+  });
+}
