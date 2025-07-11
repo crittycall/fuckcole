@@ -1,7 +1,8 @@
 import config from "./config";
 import "./features/Riftstalker/Impel";
 import "./features/Riftstalker/dudechill"
+import { sendMsg } from "./utils/utils";
 
 
 register("command", () => config.openGUI()).setName("fuckcole").setAliases("fc");
-register("gameLoad", () => ChatLib.chat("crit 11 module loaded"));
+register("gameLoad", () => sendMsg("&ait didnt fail loading ggwp"));

@@ -3,7 +3,6 @@ import { doJump, leftClick, setSneakKey } from "../../utils/utils";
 import serverRotations from "../../utils/serverRotations";
 import config from "../../config";
 
-new Keybind("jumper", Keyboard.KEY_NONE, "jumper").registerKeyPress(() => doJump());
 
 const processedCommands = new Set();
 let clearTimeout = null;
@@ -43,7 +42,7 @@ register("packetReceived", (packet, event) => {
 
 }).setFilteredClass(Java.type("net.minecraft.network.play.server.S45PacketTitle"));
 
-///doing the ban packet///
+///doing the ban packet/// //add a way to block clicks while impeling when not mania
 
 function impelv2(yaw, pitch) {
   serverRotations.setRotation(yaw, pitch, () => {
@@ -55,3 +54,5 @@ function impelv2(yaw, pitch) {
     });
   });
 }
+
+new Keybind("jumper", Keyboard.KEY_NONE, "jumper").registerKeyPress(() => impelv2(Player.getYaw(), -90));

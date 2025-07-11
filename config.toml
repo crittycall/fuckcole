@@ -1,7 +1,12 @@
 
+[settings]
+
+	[settings.category]
+		shorten_prefix = false
+
 [riftstalker]
 
 	[riftstalker.category]
-		auto_ice = true
+		auto_ice = false
 		auto_impel = true
 

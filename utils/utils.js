@@ -1,5 +1,7 @@
+// 99% (realistically 100%) of this is liberated from jcnlkclient!! thanks jc for letting me be a skid <3
 const KeyBinding = Java.type("net.minecraft.client.settings.KeyBinding");
-
+export const prefix = ("§f[§afuckcole§f] ")
+export const sendMsg = (msg) => ChatLib.chat(prefix + msg)
 
 export function leftClick() {
   const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null);

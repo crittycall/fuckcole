@@ -3,6 +3,7 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 @Vigilant("Fuckcole", "Fuckcole")
 
 class Config {
+   /////////////riftstalker/////////////
     @SwitchProperty({
     name: "Auto Impel",
         description: "Automatically impels for you (gg)",
@@ -17,7 +18,14 @@ class Config {
         subcategory: "Category"
     })
     autoice = false
-    
+    /////////////fuckcole settings/////////////
+    @SwitchProperty({
+    name: "Shorten Prefix",
+        description: "Shorten prefix from fuckcole to fc",
+        category: "Settings",
+        subcategory: "Category"
+    })
+    shortenprefix = false
     constructor() {
         this.initialize(this);
 
