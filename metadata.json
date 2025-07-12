@@ -2,7 +2,7 @@
   "name": "§afuckcole",
   "creator": "crit11, jcnlk",
   "description": "cheating (jcnlk was here)",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "entry": "index.js",
   "requires": ["tska", "Vigilance"]
 }
