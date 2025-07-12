@@ -1,6 +1,12 @@
 import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProperty, @SelectorProperty } from "Vigilance";
 
-@Vigilant("Fuckcole", "§aFuckcole§r") // schizo color sooo cool ik
+@Vigilant("Fuckcole", "§aFuckcole§r", {
+ getCategoryComparator: () => (a, b) => {
+        const order = ["Settings", "Riftstalker"];
+        return order.indexOf(a.name) - order.indexOf(b.name);
+    }
+
+}) // schizo color sooo cool ik
 
 class Config {
     ///// RIFTSTALKER /////
@@ -38,14 +44,14 @@ class Config {
     shortenprefix = false;
 
     /////////////parakeet/////////////
-   @TextProperty({
+   /**@TextProperty({
         name: "Parakeet Message",
         description: "Repeat any message in chat (This is extremly schizo idk why anyone would ever use this)",
         category: "Parakeet",
         subcategory: "Category"
     })
     parakeetMessage = "";
-   
+   */
     constructor() {
         this.initialize(this);
 
