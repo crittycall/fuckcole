@@ -39,10 +39,23 @@ class Config {
         name: "Shorten Prefix",
         description: "Shorten prefix from fuckcole to fc",
         category: "Settings",
-        subcategory: "Category"
+        subcategory: "Fuckcole settings"
     })
     shortenprefix = false;
-
+    @SwitchProperty({
+        name: "Show Me",
+        description: "Blame jcnlk (/showme)",
+        category: "Settings",
+        subcategory: "Commands"
+    })
+    enableshowme = false;
+    @SwitchProperty({
+        name: "boom",
+        description: "Blame jcnlk (/boom)",
+        category: "Settings",
+        subcategory: "Commands"
+    })
+    enableboom = false;
     /////////////parakeet/////////////
    /**@TextProperty({
         name: "Parakeet Message",
