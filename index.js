@@ -4,6 +4,9 @@ import "./features/Riftstalker/dudechill";
 import { sendMsg } from "./utils/utils";
 import "./commands/showme"
 import "./commands/boom"
+import "./commands/debug"
+
+
 
 register("command", () => config.openGUI()).setName("fuckcole").setAliases(["fc", "cole"]);
 register("gameLoad", () => sendMsg("&aIt didnt fail loading ggwp"));

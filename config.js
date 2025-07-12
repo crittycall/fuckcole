@@ -2,7 +2,7 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 
 @Vigilant("Fuckcole", "§aFuckcole§r", {
  getCategoryComparator: () => (a, b) => {
-        const order = ["Settings", "Riftstalker"];
+        const order = ["Settings", "Riftstalker", "Debug"];
         return order.indexOf(a.name) - order.indexOf(b.name);
     }
 
@@ -36,12 +36,21 @@ class Config {
 
     ///// SETTINGS /////
     @SwitchProperty({
-        name: "Shorten Prefix",
-        description: "Shorten prefix from fuckcole to fc",
+        name: "Toggle Custom Prefix",
+        description: "",
         category: "Settings",
         subcategory: "Fuckcole settings"
     })
-    shortenprefix = false;
+    togglecustomprefix = false;
+   
+    @TextProperty({
+        name: "Custom Prefix Text",
+        description: "",
+        category: "Settings",
+        subcategory: "Fuckcole settings"
+    })
+    prefixtext = ""
+
     @SwitchProperty({
         name: "Show Me",
         description: "Blame jcnlk (/showme)",
@@ -49,6 +58,7 @@ class Config {
         subcategory: "Commands"
     })
     enableshowme = false;
+   
     @SwitchProperty({
         name: "boom",
         description: "Blame jcnlk (/boom)",
@@ -56,6 +66,23 @@ class Config {
         subcategory: "Commands"
     })
     enableboom = false;
+
+    ///// DEBUG /////
+     @SwitchProperty({
+        name: "Toggle Debug",
+        description: "Enables debug features",
+        category: "Debug",
+        subcategory: "Debug"
+    })
+    debugmode = false;
+    
+    @TextProperty({
+        name: "Change Debug Text",
+        description: "",
+        category: "Debug",
+        subcategory: "Debug"
+    })
+    debugtext = ""
     /////////////parakeet/////////////
    /**@TextProperty({
         name: "Parakeet Message",
@@ -69,6 +96,9 @@ class Config {
         this.initialize(this);
 
         this.addDependency("No Rotate", "Toggle Auto Impel");
+        this.addDependency("Change Debug Text", "Toggle Debug")
+        //this.addDependency("Shorten Prefix", "Toggle Custom Prefix")
+        this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
     }
 }
 
