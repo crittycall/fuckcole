@@ -1,6 +1,6 @@
 import { rightClick, sendMsg, swapToItem } from "../../utils/utils";
 import { Keybind } from "../../../tska/shared/Keybind";
-
+import config from "../../config";
 /**
  * why dudechill.js wtf pls
  */
@@ -21,4 +21,4 @@ function autoIce() {
 /**
  * Stop using schizo keybinds to test your stuff
  */
-new Keybind("lfitem", Keyboard.KEY_NONE, "lfitem").registerKeyPress(() => autoIce());
+new Keybind("lfitem", Keyboard.KEY_NONE, "lfitem").registerKeyPress(() => { if (config.debugmode) {autoIce()}});

@@ -4,4 +4,9 @@ import { sendMsg } from "../utils/utils"
 register("command", ()=> {
 if (config.debugmode) {ChatLib.chat(config.debugtext)   
  } else {sendMsg("Debug mode not activated")}
-}).setName("debug")
+}).setName("checkdebugtext")
+
+register("command", ()=> {
+if (config.debugmode) {sendMsg(Player.getHeldItem().getName().removeFormatting().toLowerCase())   
+ } else {sendMsg("Debug mode not activated")}
+}).setName("getitem")

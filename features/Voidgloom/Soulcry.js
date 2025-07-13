@@ -1,0 +1,17 @@
+import config from "../../config"
+import { leftClick, sendMsg } from "../../utils/utils"
+let helditem = Player.getHeldItem().getName().removeFormatting().toLowerCase()
+
+
+function Soulcry() {
+ if (helditem.includes("diamond pickaxe")) {
+    Client.scheduleTask(5, ()=> {
+    leftClick()
+    sendMsg(helditem)})
+
+}}
+
+register("command", ()=> {
+if (config.debugmode) {Soulcry()
+ } else {sendMsg("Debug mode not activated")}
+}).setName("testsoulcry")

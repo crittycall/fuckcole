@@ -2,7 +2,7 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 
 @Vigilant("Fuckcole", "§aFuckcole§r", {
  getCategoryComparator: () => (a, b) => {
-        const order = ["Settings", "Riftstalker", "Debug"];
+        const order = ["Settings", "Commands", "Slayer", "Debug"];
         return order.indexOf(a.name) - order.indexOf(b.name);
     }
 
@@ -11,26 +11,26 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 class Config {
     ///// RIFTSTALKER /////
     @SwitchProperty({
-        name: "Toggle Auto Impel",
-        description: "Enables Auto Impel",
-        category: "Riftstalker",
-        subcategory: "Auto Impel"
+        name: "Auto Impel",
+        description: "",
+        category: "Slayer",
+        subcategory: "Riftstalker"
     })
     toggleImpel = false;
 
     @SwitchProperty({
         name: "No Rotate",
-        description: "Makes autoimpel serversided (risky cuz crit can't code)",
-        category: "Riftstalker",
-        subcategory: "Auto Impel"
+        description: "Makes auto impel serversided (risky cuz crit can't code)",
+        category: "Slayer",
+        subcategory: "Riftstalker"
     })
     noRotate = false;
 
     @SwitchProperty({
         name: "Auto ice",
         description: "Automatically uses holy ice for twinclaws (doesnt 0 tick any more aka gives u 30d break)",
-        category: "Riftstalker",
-        subcategory: "Automation"
+        category: "Slayer",
+        subcategory: "Riftstalker"
     })
     autoice = false;
 
@@ -50,11 +50,11 @@ class Config {
         subcategory: "Fuckcole settings"
     })
     prefixtext = ""
-
+    ///// COMMANDS /////
     @SwitchProperty({
         name: "Show Me",
         description: "Blame jcnlk (/showme)",
-        category: "Settings",
+        category: "Commands",
         subcategory: "Commands"
     })
     enableshowme = false;
@@ -62,7 +62,7 @@ class Config {
     @SwitchProperty({
         name: "boom",
         description: "Blame jcnlk (/boom)",
-        category: "Settings",
+        category: "Commands",
         subcategory: "Commands"
     })
     enableboom = false;
@@ -95,7 +95,7 @@ class Config {
     constructor() {
         this.initialize(this);
 
-        this.addDependency("No Rotate", "Toggle Auto Impel");
+        this.addDependency("No Rotate", "Auto Impel");
         this.addDependency("Change Debug Text", "Toggle Debug")
         //this.addDependency("Shorten Prefix", "Toggle Custom Prefix")
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")

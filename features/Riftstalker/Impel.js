@@ -79,5 +79,5 @@ function impelDontRotate(yaw, pitch) {
   });
 }
 
-new Keybind("impelrotate", Keyboard.KEY_NONE, "impelrotate").registerKeyPress(() => impelDoRotate(Player.getYaw(), -90));
-new Keybind("impeldontrotate", Keyboard.KEY_NONE, "impeldontrotate").registerKeyPress(() => impelDontRotate(Player.getYaw(), -90));
+//new Keybind("impelrotate", Keyboard.KEY_NONE, "impelrotate").registerKeyPress(() => impelDoRotate(Player.getYaw(), -90));
+//new Keybind("impeldontrotate", Keyboard.KEY_NONE, "impeldontrotate").registerKeyPress(() => impelDontRotate(Player.getYaw(), -90));
