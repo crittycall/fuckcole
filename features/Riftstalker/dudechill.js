@@ -1,6 +1,8 @@
 import { rightClick, sendMsg, swapToItem } from "../../utils/utils";
 import { Keybind } from "../../../tska/shared/Keybind";
 import config from "../../config";
+//const debug = (config.debugmode)
+
 /**
  * why dudechill.js wtf pls
  */
@@ -10,15 +12,18 @@ function autoIce() {
   swapToItem("fishing rod"); // REPLACE NAME LATER !!!
   Client.scheduleTask(2, () => {
     rightClick();
-    sendMsg("clicked"); // debug
+    //if (debug) sendMsg("clicked"); // debug
   });
   Client.scheduleTask(3, () => {
     Player.setHeldItemIndex(lastitem);
-    sendMsg(lastitem); // debug
+    //if (debug) sendMsg(lastitem); // debug
   });
 }
 
 /**
  * Stop using schizo keybinds to test your stuff
  */
-new Keybind("lfitem", Keyboard.KEY_NONE, "lfitem").registerKeyPress(() => { if (config.debugmode) {autoIce()}});
+register("command", ()=> {
+if (config.debugmode) {autoIce()} 
+else {sendMsg("Debug mode not activated")}
+}).setName("testice")

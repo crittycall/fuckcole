@@ -17,6 +17,26 @@ class Config {
         subcategory: "Riftstalker"
     })
     toggleImpel = false;
+    
+    @SliderProperty({
+        name: "Rotate Speed (in)",
+        description: "Speed is in ms; does not apply to no rotate (lower ms = riskier)",
+        category: "Slayer",
+        subcategory: "Riftstalker",
+        min: 50,
+        max: 500
+    })
+     impelSpeedIn = 100;
+
+     @SliderProperty({
+        name: "Rotate Speed (out)",
+        description: "Speed is in ms; does not apply to no rotate (lower ms = riskier)",
+        category: "Slayer",
+        subcategory: "Riftstalker",
+        min: 50,
+        max: 500
+    })
+     impelSpeedOut = 100;
 
     @SwitchProperty({
         name: "No Rotate",
@@ -96,9 +116,10 @@ class Config {
         this.initialize(this);
 
         this.addDependency("No Rotate", "Auto Impel");
+        this.addDependency("Rotate Speed (in)", "Auto Impel")
         this.addDependency("Change Debug Text", "Toggle Debug")
-        //this.addDependency("Shorten Prefix", "Toggle Custom Prefix")
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
+
     }
 }
 

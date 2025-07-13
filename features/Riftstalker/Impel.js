@@ -57,11 +57,11 @@ register("packetReceived", (packet, event) => {
 function impelDoRotate(yaw, pitch) {
   let oldpitch = Player.getPitch();
   sendMsg("§bAutoimpel: §l§cstarted"); // debug
-  rotateSmoothly(yaw, pitch, 100);
+  rotateSmoothly(yaw, pitch, config.impelSpeedIn);
   setTimeout(() => {
     leftClick();
-    rotateSmoothly(Player.getYaw(), oldpitch, 50);
-  }, 100);
+    rotateSmoothly(Player.getYaw(), oldpitch, config.impelSpeedOut);
+  }, config.impelSpeedIn - 10);
   sendMsg("§bAutoimpel: §l§acomplete"); // again
 }
 
@@ -79,5 +79,19 @@ function impelDontRotate(yaw, pitch) {
   });
 }
 
-//new Keybind("impelrotate", Keyboard.KEY_NONE, "impelrotate").registerKeyPress(() => impelDoRotate(Player.getYaw(), -90));
-//new Keybind("impeldontrotate", Keyboard.KEY_NONE, "impeldontrotate").registerKeyPress(() => impelDontRotate(Player.getYaw(), -90));
+///// DEBUG /////
+
+register("command", (pitch)=> {
+ if (pitch == "click_up")  {pitch = -90}
+ if (pitch == "click_down") {pitch = 90}
+if (config.debugmode) {impelDoRotate(Player.getYaw(), pitch)} 
+else {sendMsg("Debug mode not activated")}
+}).setName("testimpelrotate").setTabCompletions("click_up", "click_down")
+
+
+register("command", (pitch)=> {
+ if (pitch == "click_up")  {pitch = -90}
+ if (pitch == "click_down") {pitch = 90}
+if (config.debugmode) {impelDontRotate(Player.getYaw(), pitch)} 
+else {sendMsg("Debug mode not activated")}
+}).setName("testimpelnorotate").setTabCompletions("click_up", "click_down")
