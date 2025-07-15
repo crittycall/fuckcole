@@ -16,7 +16,7 @@ export const sendMsg = (msg) => ChatLib.chat(prefix + msg);
 export const debugPrefix = "§f[§aDEBUG§f] §r"
 export const sendDebugMsg = (msg) => ChatLib.chat(debugPrefix + prefix + msg);
 export const C07PacketPlayerDigging = Java.type("net.minecraft.network.play.client.C07PacketPlayerDigging")
-
+export const EntityOtherPlayerMP = Java.type("net.minecraft.client.entity.EntityOtherPlayerMP")
 
 
 export function leftClick() {
@@ -68,3 +68,11 @@ export function rotateSmoothly(yaw, pitch, time) {
     if (progress >= 1) trigger.unregister();
   });
 }
+const registers = [];
+export const registerWhen = (trigger, dependency) => {
+  registers.push({
+    controller: trigger.unregister(),
+    dependency,
+    registered: false,
+  });
+};

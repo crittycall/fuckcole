@@ -10,6 +10,14 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 
 class Config {
     ///// RIFTSTALKER /////
+      @SwitchProperty({
+        name: "Vampire Nuke",
+        description: "",
+        category: "Slayer",
+        subcategory: "Riftstalker"
+    })
+    toggleVampireNuke = false;
+
     @SwitchProperty({
         name: "Auto Impel",
         description: "",
@@ -47,12 +55,12 @@ class Config {
     noRotate = false;
 
     @SwitchProperty({
-        name: "Auto ice",
-        description: "Automatically uses holy ice for twinclaws (doesnt 0 tick any more aka gives u 30d break)",
+        name: "Auto Melon",
+        description: "",
         category: "Slayer",
         subcategory: "Riftstalker"
     })
-    autoice = false;
+    automelon = false;
 
     ///// SETTINGS /////
     @SwitchProperty({
@@ -114,9 +122,11 @@ class Config {
    */
     constructor() {
         this.initialize(this);
-
+        this.addDependency("Auto Impel", "Vampire Nuke")
         this.addDependency("No Rotate", "Auto Impel");
         this.addDependency("Rotate Speed (in)", "Auto Impel")
+        this.addDependency("Rotate Speed (out)", "Auto Impel")
+        this.addDependency("Auto Melon", "Vampire Nuke")
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
 
     }

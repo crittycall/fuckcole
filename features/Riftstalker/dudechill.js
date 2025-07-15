@@ -1,22 +1,22 @@
-import { rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
+import { EntityOtherPlayerMP, rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
 import { Keybind } from "../../../tska/shared/Keybind";
 import config from "../../config";
+
 //const debug = (config.debugmode)
-const EntityOtherPlayerMP = Java.type.class("net.minecraft.entity.player.EntityOtherPlayerMP");
 /**
  * why dudechill.js wtf pls
  */
 
 
-register("tick", () => {
-const entities = World.getAllEntitiesOfType("net.minecraft.entity.player.EntityOtherPlayerMP")
-entities.forEach(Entity => {
-if (Entity.getName().removeFormatting() === "Lumber Merchant")
+/*register("tick", () => {
+const entities = World.getAllEntitiesOfType(EntityOtherPlayerMP);
+entities.forEach(entity => {
+if (entity.getName().removeFormatting().includes("Th"))
 sendDebugMsg("lumber merchant found")
 else sendDebugMsg("no")
 })
 
-})
+})*/
 
 function autoIce() {
   const lastitem = Player.getHeldItemIndex();
