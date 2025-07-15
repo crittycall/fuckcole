@@ -1,4 +1,4 @@
-import { rotateSmoothly, doJump, leftClick, sendMsg, setSneakKey, C02PacketUseEntity } from "../../utils/utils";
+import { rotateSmoothly, doJump, leftClick, sendMsg, setSneakKey, C02PacketUseEntity, C07PacketPlayerDigging, sendDebugMsg } from "../../utils/utils";
 import serverRotations from "../../utils/serverRotations";
 import config from "../../config";
 import { Keybind } from "../../../tska/shared/Keybind";
@@ -11,7 +11,10 @@ import { Keybind } from "../../../tska/shared/Keybind";
 const processedCommands = new Set();
 let clearTimeout = null;
 
-const cancelPacket = register("packetSent", (packet, event) => cancel(event)).setFilteredClass(C02PacketUseEntity).unregister();
+const cancelHitPacket = register("packetSent", (packet, event) => cancel(event)).setFilteredClass(C02PacketUseEntity).unregister();
+const cancelDigPacket = register("packetSent", (packet, event) => cancel(event)).setFilteredClass(C07PacketPlayerDigging).unregister();
+
+
 
 register("packetReceived", (packet, event) => {
   if (!config.toggleImpel) return;
@@ -32,7 +35,11 @@ register("packetReceived", (packet, event) => {
 
   if (message.startsWith("Impel: CLICK UP")) {
     if (config.noRotate) {
-      impelDontRotate(Player.getYaw(), -90);
+      impelDontRotate(Player.getYaw(), -90,);
+      cancelDigPacket.register();
+      sendDebugMsg("registered cancel dig packet");
+      Client.scheduleTask(10,() => {cancelDigPacket.unregister();
+        sendDebugMsg("unregistered cancel dig packet")});
     } else {
       impelDoRotate(Player.getYaw(), -90);
     }
@@ -43,43 +50,46 @@ register("packetReceived", (packet, event) => {
       impelDoRotate(Player.getYaw(), 90);
     }
   } else if (message.startsWith("Impel: SNEAK")) {
-    sendMsg("§bAutoimpel: §l§cstarted"); // why
     setSneakKey(true);
     setTimeout(() => setSneakKey(false), 50);
-    sendMsg("§bAutoimpel: §l§acomplete"); // debug
+    DebugImpel()
   } else if (message.startsWith("Impel: JUMP")) {
-    sendMsg("§bAutoimpel: §l§cstarted"); // here
     doJump();
-    sendMsg("§bAutoimpel: §l§acomplete"); // omg
+    DebugImpel()
   }
 }).setFilteredClass(Java.type("net.minecraft.network.play.server.S45PacketTitle"));
 
 function impelDoRotate(yaw, pitch) {
   let oldpitch = Player.getPitch();
-  sendMsg("§bAutoimpel: §l§cstarted"); // debug
   rotateSmoothly(yaw, pitch, config.impelSpeedIn);
   setTimeout(() => {
     leftClick();
     rotateSmoothly(Player.getYaw(), oldpitch, config.impelSpeedOut);
   }, config.impelSpeedIn - 10);
-  sendMsg("§bAutoimpel: §l§acomplete"); // again
+  DebugImpel()
 }
 
-function impelDontRotate(yaw, pitch) {
+function impelDontRotate(yaw, pitch,) {
   serverRotations.setRotation(yaw, pitch, () => {
-    sendMsg("§bAutoimpel: §l§cstarted"); // pls
-    cancelPacket.register();
+    cancelHitPacket.register();
+    sendDebugMsg("registered cancel hit packet");
     leftClick();
-
     Client.scheduleTask(0, () => {
       serverRotations.resetRotation();
-      sendMsg("§bAutoimpel: §l§acomplete"); // kms
-      cancelPacket.unregister();
+      DebugImpel()
+        cancelHitPacket.unregister();
+      sendDebugMsg("unregistered cancel hit packet");
     });
   });
 }
 
 ///// DEBUG /////
+
+function DebugImpel() {
+  if (config.debugmode)
+  sendDebugMsg("§bAutoimpel: §l§acomplete");
+}
+
 
 register("command", (pitch)=> {
  if (pitch == "click_up")  {pitch = -90}
@@ -95,3 +105,9 @@ register("command", (pitch)=> {
 if (config.debugmode) {impelDontRotate(Player.getYaw(), pitch)} 
 else {sendMsg("Debug mode not activated")}
 }).setName("testimpelnorotate").setTabCompletions("click_up", "click_down")
+
+
+register("command", ()=> {
+if (config.debugmode) {cancelDigPacket.register()} 
+else {sendMsg("Debug mode not activated")}
+}).setName("testdigpacket")

@@ -13,6 +13,11 @@ export let prefix = config.togglecustomprefix ? "[§a" + config.prefixtext + "§
 export const Jump = new KeyBind(Client.getMinecraft().field_71474_y.field_74314_A);
 export const KeyBinding = Java.type("net.minecraft.client.settings.KeyBinding");
 export const sendMsg = (msg) => ChatLib.chat(prefix + msg);
+export const debugPrefix = "§f[§aDEBUG§f] §r"
+export const sendDebugMsg = (msg) => ChatLib.chat(debugPrefix + prefix + msg);
+export const C07PacketPlayerDigging = Java.type("net.minecraft.network.play.client.C07PacketPlayerDigging")
+
+
 
 export function leftClick() {
   const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null);
