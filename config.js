@@ -96,7 +96,7 @@ class Config {
     })
     debugmode = false;
     
-    @TextProperty({
+   /** @TextProperty({
         name: "Change Debug Text",
         description: "",
         category: "Debug",
@@ -117,7 +117,6 @@ class Config {
 
         this.addDependency("No Rotate", "Auto Impel");
         this.addDependency("Rotate Speed (in)", "Auto Impel")
-        this.addDependency("Change Debug Text", "Toggle Debug")
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
 
     }
