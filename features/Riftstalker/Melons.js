@@ -5,7 +5,7 @@ let tickCounter = 0;
 
 import config from "../../config";
 registerWhen(register("tick", () => {
-  sendDebugMsg("a");
+
   tickCounter++;
   if (tickCounter % 10 !== 0) return;
 
