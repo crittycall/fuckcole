@@ -17,7 +17,7 @@ export const debugPrefix = "§f[§aDEBUG§f] §r"
 export const sendDebugMsg = (msg) => ChatLib.chat(debugPrefix + prefix + msg);
 export const C07PacketPlayerDigging = Java.type("net.minecraft.network.play.client.C07PacketPlayerDigging")
 export const EntityOtherPlayerMP = Java.type("net.minecraft.client.entity.EntityOtherPlayerMP")
-
+export const EntityArmorStand = Java.type("net.minecraft.entity.item.EntityArmorStand")
 
 export function leftClick() {
   const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null);

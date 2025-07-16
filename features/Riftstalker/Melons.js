@@ -13,7 +13,7 @@ registerWhen(register("tick", () => {
   let HP = Player.getHP();
 
   if (HP < 9) {
-    swapToItem("juicy healing melon");
+    swapToItem("healing melon");
     Client.scheduleTask(2, () => rightClick());
     Client.scheduleTask(3, () => {
       Player.setHeldItemIndex(lastitem);

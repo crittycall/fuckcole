@@ -19,6 +19,22 @@ class Config {
     toggleVampireNuke = false;
 
     @SwitchProperty({
+        name: "Auto Holy Ice",
+        description: "",
+        category: "Slayer",
+        subcategory: "Riftstalker"
+    })
+    toggleIce = false;
+
+    @SwitchProperty({
+        name: "Auto Melon",
+        description: "",
+        category: "Slayer",
+        subcategory: "Riftstalker"
+    })
+    automelon = false;
+
+    @SwitchProperty({
         name: "Auto Impel",
         description: "",
         category: "Slayer",
@@ -54,13 +70,6 @@ class Config {
     })
     noRotate = false;
 
-    @SwitchProperty({
-        name: "Auto Melon",
-        description: "",
-        category: "Slayer",
-        subcategory: "Riftstalker"
-    })
-    automelon = false;
 
     ///// SETTINGS /////
     @SwitchProperty({
@@ -111,6 +120,7 @@ class Config {
         this.addDependency("Rotate Speed (in)", "Auto Impel")
         this.addDependency("Rotate Speed (out)", "Auto Impel")
         this.addDependency("Auto Melon", "Vampire Nuke")
+        this.addDependency("Auto Holy Ice", "Vampire Nuke")
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
 
     }
