@@ -29,7 +29,7 @@ register("step", () => {
             //sendDebugMsg(entity.getName());
             
             // Extract timer from name (e.g., "TWINCLAWS 0.3s" -> "0.3")
-            const timerMatch = formattedName.match(/(\d+\.\d+)s/);
+            const timerMatch = formattedName.match(/TWINCLAWS\s+(\d+\.\d+)s/);
             if (timerMatch) {
                 twinclawsTimer = parseFloat(timerMatch[1]);
             }
@@ -52,11 +52,10 @@ register("step", () => {
         if (distance.toFixed(2) > 3) return;
         
         // Call autoIce() when timer is higher than last one (new attack started)
-        if (twinclawsTimer && (lastTwinclawsTimer === null || twinclawsTimer > lastTwinclawsTimer)) {
+       if (twinclawsTimer && (lastTwinclawsTimer === null || twinclawsTimer > lastTwinclawsTimer-0.1)) {
             autoIce();
             sendDebugMsg(`autoIce() called! Timer: ${twinclawsTimer}s (was ${lastTwinclawsTimer}s)`);
         }
-        
         // Update the last timer regardless
         if (twinclawsTimer) {
             lastTwinclawsTimer = twinclawsTimer;
@@ -64,15 +63,15 @@ register("step", () => {
     } else {
         //sendDebugMsg("Could not find both TWINCLAWS and player armor stand for distance calculation");
     }
-}).setDelay(0.3);
+}).setDelay(0.15);
 
 function autoIce() {
   const lastitem = Player.getHeldItemIndex();
-  swapToItem("holy ice"); // REPLACE NAME LATER !!!
-  Client.scheduleTask(2, () => {
+    swapToItem("holy ice");
+  Client.scheduleTask(5, () => {
     rightClick();
   });
-  Client.scheduleTask(3, () => {
+  Client.scheduleTask(7, () => {
     Player.setHeldItemIndex(lastitem);
   });
 }
