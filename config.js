@@ -1,7 +1,7 @@
 import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProperty, @SelectorProperty } from "Vigilance";
 
 @Vigilant("Fuckcole", "§aFuckcole§r", {
- getCategoryComparator: () => (a, b) => {
+    getCategoryComparator: () => (a, b) => {
         const order = ["Settings", "Commands", "Slayer", "Debug"];
         return order.indexOf(a.name) - order.indexOf(b.name);
     }
@@ -104,22 +104,6 @@ class Config {
     })
     debugmode = false;
     
-   /** @TextProperty({
-        name: "Change Debug Text",
-        description: "",
-        category: "Debug",
-        subcategory: "Debug"
-    })
-    debugtext = ""
-    /////////////parakeet/////////////
-   /**@TextProperty({
-        name: "Parakeet Message",
-        description: "Repeat any message in chat (This is extremly schizo idk why anyone would ever use this)",
-        category: "Parakeet",
-        subcategory: "Category"
-    })
-    parakeetMessage = "";
-   */
     constructor() {
         this.initialize(this);
         this.addDependency("Auto Impel", "Vampire Nuke")

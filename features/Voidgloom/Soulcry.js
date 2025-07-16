@@ -1,17 +1,16 @@
-import config from "../../config"
-import { leftClick, sendMsg } from "../../utils/utils"
-let helditem = Player.getHeldItem().getName().removeFormatting().toLowerCase()
-
+import config from "../../config";
+import { leftClick, sendMsg } from "../../utils/utils";
 
 function Soulcry() {
- if (helditem.includes("diamond pickaxe")) {
-    Client.scheduleTask(5, ()=> {
-    leftClick()
-    sendMsg(helditem)})
+  if (Player.getHeldItem()?.getName()?.removeFormatting()?.toLowerCase()?.includes("diamond pickaxe")) {
+    Client.scheduleTask(5, () => {
+      leftClick();
+      sendMsg(helditem);
+    });
+  }
+}
 
-}}
-
-register("command", ()=> {
-if (config.debugmode) {Soulcry()
- } else {sendMsg("Debug mode not activated")}
-}).setName("testsoulcry")
+register("command", () => {
+  if (config.debugmode) Soulcry();
+  else sendMsg("Debug mode not activated");
+}).setName("testsoulcry");

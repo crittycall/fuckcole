@@ -5,7 +5,6 @@ import { sendMsg } from "./utils/utils";
 import "./commands/showme"
 import "./commands/boom"
 import "./commands/debug"
-//import "./features/Voidgloom/Soulcry"
 import "./features/Riftstalker/Melons"
 
 register("command", () => config.openGUI()).setName("fuckcole").setAliases(["fc", "cole"]);
