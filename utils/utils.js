@@ -68,6 +68,7 @@ export function rotateSmoothly(yaw, pitch, time) {
     if (progress >= 1) trigger.unregister();
   });
 }
+const SettingsGui = Java.type("gg.essential.vigilance.gui.SettingsGui");
 const registers = [];
 export const registerWhen = (trigger, dependency) => {
   registers.push({
@@ -76,3 +77,21 @@ export const registerWhen = (trigger, dependency) => {
     registered: false,
   });
 };
+
+export const setRegisters = () => {
+  registers.forEach((item) => {
+    const shouldBeRegistered = item.dependency();
+    if (shouldBeRegistered && !item.registered) {
+      item.controller.register();
+      item.registered = true;
+    } else if (!shouldBeRegistered && item.registered) {
+      item.controller.unregister();
+      item.registered = false;
+    }
+  });
+};
+
+register("gameLoad", () => setRegisters());
+register("guiClosed", (gui) => {
+  if (gui instanceof SettingsGui) setRegisters();
+});
