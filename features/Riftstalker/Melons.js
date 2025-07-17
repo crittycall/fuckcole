@@ -6,8 +6,8 @@ import Location from "../../../tska/skyblock/Location"
 const Automelon = register("step", () => {
   if (!config.automelon) return;
   const lastitem = Player.getHeldItemIndex();
-  let HP = Player.getHP();
   const maxHP = Player.asPlayerMP()?.getMaxHP()
+  let HP = Player.getHP();
   if (HP < maxHP * config.HPThreshold) {
     swapToItem("healing melon");
     Client.scheduleTask(2, () => rightClick());
