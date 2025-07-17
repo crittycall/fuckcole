@@ -1,5 +1,4 @@
 import config from "../config";
-import { sendMsg, dig } from "../utils/utils";
 
 register("command", () => {
   if (config.debugmode) ChatLib.chat(config.debugtext);
