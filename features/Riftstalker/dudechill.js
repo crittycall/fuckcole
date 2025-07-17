@@ -1,4 +1,4 @@
-import { rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
+import { rightClick, sendDebugMsg, sendMsg, swapToItem, swapToItemID } from "../../utils/utils";
 import { EntityArmorStand } from "../../../BloomCore/utils/Utils";
 import { scheduleTask } from "../../../tska/shared/ServerTick";
 import Location from "../../../tska/skyblock/Location";
@@ -39,7 +39,7 @@ const autoiceregister = register("step", () => {
     if (distance.toFixed(2) > 3) return;
 
     if (twinclawsTimer && (lastTwinclawsTimer === null || twinclawsTimer > lastTwinclawsTimer - 0.1)) {
-      autoIce();
+      scheduleTask(()=>autoIce(), 7);
       sendDebugMsg(`autoIce() called! Timer: ${twinclawsTimer}s (was ${lastTwinclawsTimer}s)`);
     }
     if (twinclawsTimer) lastTwinclawsTimer = twinclawsTimer;
@@ -48,9 +48,9 @@ const autoiceregister = register("step", () => {
 
 function autoIce() {
   const lastitem = Player.getHeldItemIndex();
-  swapToItem("holy ice");
-  scheduleTask(() => rightClick(), 7);
-  scheduleTask(() => Player.setHeldItemIndex(lastitem), 8);
+  swapToItemID("HOLY_ICE");
+  scheduleTask(() => rightClick(), 1);
+  scheduleTask(() => Player.setHeldItemIndex(lastitem), 2);
 }
 
 Location.onWorldChange((world) => {

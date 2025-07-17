@@ -1,4 +1,4 @@
-import { sendDebugMsg, swapToItem } from "../../utils/utils";
+import { sendDebugMsg, swapToItemID } from "../../utils/utils";
 import { rightClick } from "../../utils/utils";
 import config from "../../config";
 import Location from "../../../tska/skyblock/Location";
@@ -9,7 +9,7 @@ const Automelon = register("step", () => {
   const maxHP = Player.asPlayerMP()?.getMaxHP()
   let HP = Player.getHP();
   if (HP < maxHP * config.HPThreshold) {
-    swapToItem("healing melon");
+    swapToItemID("HEALING_MELON");
     Client.scheduleTask(2, () => rightClick());
     Client.scheduleTask(3, () => {
       Player.setHeldItemIndex(lastitem);
