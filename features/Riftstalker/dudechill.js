@@ -1,8 +1,8 @@
-import {EntityArmorStand, rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
+import { EntityArmorStand, rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
 import config from "../../config";
 import Location from "../../../tska/skyblock/Location";
-import { scheduleTask } from "../../../tska/shared/ServerTick"
-//const debug = (config.debugmode)
+import { scheduleTask } from "../../../tska/shared/ServerTick";
+
 /**
  * why dudechill.js wtf pls
  */
@@ -10,80 +10,53 @@ import { scheduleTask } from "../../../tska/shared/ServerTick"
 let lastTwinclawsTimer = null;
 
 const autoiceregister = register("step", () => {
-    const entities = World.getAllEntitiesOfType(EntityArmorStand);
-    const playerName = Player.getName();
-    let bloodfiendPos = null;
-    let twinclawsPos = null;
-    let playerArmorStandPos = null;
-    let twinclawsTimer = null;
-    if (!config.toggleIce) return;
-    entities.forEach(entity => {
-        const formattedName = ChatLib.removeFormatting(entity.getName());
-        
-        if (formattedName.includes("Bloodfiend")) {
-            bloodfiendPos = entity.getPos();
-           // sendDebugMsg(`Bloodfiend at: ${bloodfiendPos.x.toFixed(1)}, ${bloodfiendPos.y.toFixed(1)}, ${bloodfiendPos.z.toFixed(1)}`);
-        }
-        if (formattedName.includes("TWINCLAWS")) {
-            twinclawsPos = entity.getPos();
-           // sendDebugMsg(`TWINCLAWS at: ${twinclawsPos.x.toFixed(1)}, ${twinclawsPos.y.toFixed(1)}, ${twinclawsPos.z.toFixed(1)}`);
-            //sendDebugMsg(entity.getName());
-            
-            // Extract timer from name (e.g., "TWINCLAWS 0.3s" -> "0.3")
-            const timerMatch = formattedName.match(/TWINCLAWS\s+(\d+\.\d+)s/);
-            if (timerMatch) {
-                twinclawsTimer = parseFloat(timerMatch[1]);
-            }
-        }
-        if (formattedName.includes(playerName)) {
-            playerArmorStandPos = entity.getPos();
-            //sendDebugMsg(`${playerName} armor stand at: ${playerArmorStandPos.x.toFixed(1)}, ${playerArmorStandPos.y.toFixed(1)}, ${playerArmorStandPos.z.toFixed(1)}`);
-        }
-    });
-    
-    // Only calculate distance between TWINCLAWS and player armor stand
-    if (twinclawsPos && playerArmorStandPos) {
-        const distance = Math.sqrt(
-            Math.pow(playerArmorStandPos.x - twinclawsPos.x, 2) + 
-            Math.pow(playerArmorStandPos.y - twinclawsPos.y, 2) + 
-            Math.pow(playerArmorStandPos.z - twinclawsPos.z, 2)
-        );
-        //sendDebugMsg(`Distance between TWINCLAWS and ${playerName}: ${distance.toFixed(2)} blocks`);
-        
-        if (distance.toFixed(2) > 3) return;
-        
-        // Call autoIce() when timer is higher than last one (new attack started)
-       if (twinclawsTimer && (lastTwinclawsTimer === null || twinclawsTimer > lastTwinclawsTimer-0.1)) {
-            autoIce();
-            sendDebugMsg(`autoIce() called! Timer: ${twinclawsTimer}s (was ${lastTwinclawsTimer}s)`);
-        }
-        // Update the last timer regardless
-        if (twinclawsTimer) {
-            lastTwinclawsTimer = twinclawsTimer;
-        }
-    } else {
-        //sendDebugMsg("Could not find both TWINCLAWS and player armor stand for distance calculation");
+  const entities = World.getAllEntitiesOfType(EntityArmorStand);
+  const playerName = Player.getName();
+  let bloodfiendPos = null;
+  let twinclawsPos = null;
+  let playerArmorStandPos = null;
+  let twinclawsTimer = null;
+  if (!config.toggleIce) return;
+  entities.forEach((entity) => {
+    const formattedName = ChatLib.removeFormatting(entity.getName());
+
+    if (formattedName.includes("Bloodfiend")) bloodfiendPos = entity.getPos();
+    if (formattedName.includes("TWINCLAWS")) {
+      twinclawsPos = entity.getPos();
+
+      const timerMatch = formattedName.match(/TWINCLAWS\s+(\d+\.\d+)s/);
+      if (timerMatch) twinclawsTimer = parseFloat(timerMatch[1]);
     }
+    if (formattedName.includes(playerName)) {
+      playerArmorStandPos = entity.getPos();
+    }
+  });
+
+  if (twinclawsPos && playerArmorStandPos) {
+    const distance = Math.sqrt(Math.pow(playerArmorStandPos.x - twinclawsPos.x, 2) + Math.pow(playerArmorStandPos.y - twinclawsPos.y, 2) + Math.pow(playerArmorStandPos.z - twinclawsPos.z, 2));
+
+    if (distance.toFixed(2) > 3) return;
+
+    if (twinclawsTimer && (lastTwinclawsTimer === null || twinclawsTimer > lastTwinclawsTimer - 0.1)) {
+      autoIce();
+      sendDebugMsg(`autoIce() called! Timer: ${twinclawsTimer}s (was ${lastTwinclawsTimer}s)`);
+    }
+    if (twinclawsTimer) lastTwinclawsTimer = twinclawsTimer;
+  }
 }).setDelay(0.15).unregister();
 
 function autoIce() {
   const lastitem = Player.getHeldItemIndex();
-    swapToItem("holy ice");
-    scheduleTask( () => {
-    rightClick();
-  }, 7);
-    scheduleTask( () => {
-    Player.setHeldItemIndex(lastitem);
-  }, 8);
+  swapToItem("holy ice");
+  scheduleTask(() => rightClick(), 7);
+  scheduleTask(() => Player.setHeldItemIndex(lastitem), 8);
 }
 
-Location.onWorldChange((world)=> {
-  if (world === "the rift") autoiceregister.register()
-  else autoiceregister.unregister()
-})
-/**
- * Stop using schizo keybinds to test your stuff
- */
+Location.onWorldChange((world) => {
+  if (world === "the rift") autoiceregister.register();
+  else autoiceregister.unregister();
+});
+
 register("command", () => {
   if (config.debugmode) autoIce();
   else sendMsg("Debug mode not activated");
