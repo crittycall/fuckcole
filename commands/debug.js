@@ -1,5 +1,5 @@
 import config from "../config";
-import { sendMsg } from "../utils/utils";
+import { sendMsg, dig } from "../utils/utils";
 
 register("command", () => {
   if (config.debugmode) ChatLib.chat(config.debugtext);
@@ -10,3 +10,4 @@ register("command", () => {
   if (config.debugmode) sendMsg(Player.getHeldItem()?.getName()?.removeFormatting()?.toLowerCase());
   else sendMsg("Debug mode not activated");
 }).setName("getitem");
+

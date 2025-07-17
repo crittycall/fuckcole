@@ -3,6 +3,7 @@ import serverRotations from "../../utils/serverRotations";
 import config from "../../config";
 
 /**
+ * Click down doesnt get your vector, make it more reliable by sending playerdigging packet
  * No im not fixing this crit this is too schizo
  * atp just call it auto ban me idk
  */

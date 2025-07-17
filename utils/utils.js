@@ -35,6 +35,7 @@ export function rightClick() {
   rightClickMethod.invoke(Client.getMinecraft(), null);
 }
 
+
 export function rotate(yaw, pitch) {
   if (Number.isNaN(yaw) || Number.isNaN(pitch)) return;
   const player = Player.getPlayer();
@@ -51,10 +52,10 @@ export const swapToItem = (targetItemName) => {
   if (Player.getHeldItem()?.includes(targetItemName)) return;
   const itemSlot = Player?.getInventory()?.getItems()?.findIndex((item) => item?.getName()?.toLowerCase()?.includes(targetItemName.toLowerCase()));
   if (itemSlot === -1 || itemSlot > 7) {
-    ChatLib.chat(`&cUnable to find &6${targetItemName}&c in your hotbar`);
+    sendDebugMsg(`&cUnable to find &6${targetItemName}&c in your hotbar`);
     return;
   } else {
-    ChatLib.chat(`&aSwapping to item: &6${targetItemName}`);
+    sendDebugMsg(`&aSwapping to item: &6${targetItemName}`);
     Player.setHeldItemIndex(itemSlot);
   }
 };

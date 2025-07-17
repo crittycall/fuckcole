@@ -1,6 +1,7 @@
 import {EntityArmorStand, rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
 import config from "../../config";
 import Location from "../../../tska/skyblock/Location";
+import { scheduleTask } from "../../../tska/shared/ServerTick"
 //const debug = (config.debugmode)
 /**
  * why dudechill.js wtf pls
@@ -68,12 +69,12 @@ const autoiceregister = register("step", () => {
 function autoIce() {
   const lastitem = Player.getHeldItemIndex();
     swapToItem("holy ice");
-  Client.scheduleTask(5, () => {
+    scheduleTask( () => {
     rightClick();
-  });
-  Client.scheduleTask(7, () => {
+  }, 7);
+    scheduleTask( () => {
     Player.setHeldItemIndex(lastitem);
-  });
+  }, 8);
 }
 
 Location.onWorldChange((world)=> {
