@@ -10,15 +10,6 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 
 class Config {
     ///// RIFTSTALKER /////
-     /* @SwitchProperty({
-        name: "Vampire Nuke",
-        description: "",
-        category: "Vampire Nuke",
-        subcategory: "Riftstalker"
-    })
-    toggleVampireNuke = false;*/
-
-
     @SwitchProperty({
         name: "Auto Impel",
         description: "",
