@@ -40,19 +40,17 @@ register("packetReceived", (packet, event) => {
         cancelDigPacket.unregister();
         sendDebugMsg("unregistered cancel dig packet");
       });
-    } else {
-      impelDoRotate(Player.getYaw(), -90);
-    }
+    } else impelDoRotate(Player.getYaw(), -90);
   } else if (message.startsWith("Impel: CLICK DOWN")) {
     if (config.noRotate) impelDontRotate(Player.getYaw(), 90);
     else impelDoRotate(Player.getYaw(), 90);
   } else if (message.startsWith("Impel: SNEAK")) {
     setSneakKey(true);
     setTimeout(() => setSneakKey(false), 50);
-    DebugImpel();
+    sendDebugMsg("§bAutoimpel: §l§acomplete");
   } else if (message.startsWith("Impel: JUMP")) {
     doJump();
-    DebugImpel();
+    sendDebugMsg("§bAutoimpel: §l§acomplete");
   }
 }).setFilteredClass(Java.type("net.minecraft.network.play.server.S45PacketTitle"));
 
@@ -63,7 +61,7 @@ function impelDoRotate(yaw, pitch) {
     leftClick();
     rotateSmoothly(Player.getYaw(), oldpitch, config.impelSpeedOut);
   }, config.impelSpeedIn - 10);
-  DebugImpel();
+  sendDebugMsg("§bAutoimpel: §l§acomplete");
 }
 
 function impelDontRotate(yaw, pitch) {
@@ -73,7 +71,7 @@ function impelDontRotate(yaw, pitch) {
     leftClick();
     Client.scheduleTask(0, () => {
       serverRotations.resetRotation();
-      DebugImpel();
+      sendDebugMsg("§bAutoimpel: §l§acomplete");
       cancelHitPacket.unregister();
       sendDebugMsg("unregistered cancel hit packet");
     });
@@ -81,11 +79,6 @@ function impelDontRotate(yaw, pitch) {
 }
 
 ///// DEBUG /////
-
-function DebugImpel() {
-  if (config.debugmode) sendDebugMsg("§bAutoimpel: §l§acomplete");
-}
-
 register("command", (pitch) => {
   if (pitch == "click_up") pitch = -90;
   if (pitch == "click_down") pitch = 90;

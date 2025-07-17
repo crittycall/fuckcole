@@ -1,7 +1,7 @@
-import {sendDebugMsg,swapToItem } from "../../utils/utils";
+import { sendDebugMsg, swapToItem } from "../../utils/utils";
 import { rightClick } from "../../utils/utils";
 import config from "../../config";
-import Location from "../../../tska/skyblock/Location"
+import Location from "../../../tska/skyblock/Location";
 
 const Automelon = register("step", () => {
   if (!config.automelon) return;
@@ -18,7 +18,7 @@ const Automelon = register("step", () => {
   }
 }).setDelay(0.5).unregister();
 
-Location.onWorldChange((world)=> {
-  if (world === "the rift") Automelon.register()
-  else Automelon.unregister()
-})
+Location.onWorldChange((world) => {
+  if (world === "the rift") Automelon.register();
+  else Automelon.unregister();
+});
