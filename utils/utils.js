@@ -3,20 +3,17 @@
  * 
  * This is so schizo omg pls kill me crit
  */
-
+import { getSkyblockItemID } from "../../BloomCore/utils/Utils";
 import config from "../config";
 
 export const bezier = (t, initial, p1, p2, final) => (1 - t) * (1 - t) * (1 - t) * initial + 3 * (1 - t) * (1 - t) * t * p1 + 3 * (1 - t) * t * t * p2 + t * t * t * final;
 export const setSneakKey = (state) => KeyBinding.func_74510_a(Client.getMinecraft().field_71474_y.field_74311_E.func_151463_i(), state);
-export const C02PacketUseEntity = Java.type("net.minecraft.network.play.client.C02PacketUseEntity");
 export let prefix = config.togglecustomprefix ? "[§a" + config.prefixtext + "§f] §r" : "§f[§afuckcole§f] §r"
 export const Jump = new KeyBind(Client.getMinecraft().field_71474_y.field_74314_A);
 export const KeyBinding = Java.type("net.minecraft.client.settings.KeyBinding");
 export const sendMsg = (msg) => ChatLib.chat(prefix + msg);
-export const debugPrefix = "§f[§aDEBUG§f] §r"
-export const C07PacketPlayerDigging = Java.type("net.minecraft.network.play.client.C07PacketPlayerDigging")
-export const EntityOtherPlayerMP = Java.type("net.minecraft.client.entity.EntityOtherPlayerMP")
-export const EntityArmorStand = Java.type("net.minecraft.entity.item.EntityArmorStand")
+export const debugPrefix = "§f[§aDEBUG§f] §r";
+export const C07PacketPlayerDigging = Java.type("net.minecraft.network.play.client.C07PacketPlayerDigging");
 
 export function sendDebugMsg(msg) {
   if (!config.debugmode) return;
@@ -59,6 +56,26 @@ export const swapToItem = (targetItemName) => {
     Player.setHeldItemIndex(itemSlot);
   }
 };
+
+export const swapToItemID = (swapItems) => {
+  const itemsToSwap = Array.isArray(swapItems) ? swapItems : [swapItems];
+  const currentItemID = getSkyblockItemID(Player.getHeldItem())?.toLowerCase();
+  
+  if (itemsToSwap.some(item => currentItemID?.includes(item.toLowerCase()))) return;
+  
+  for (const targetItem of itemsToSwap) {
+    const itemSlot = Player?.getInventory()?.getItems()?.findIndex(item => getSkyblockItemID(item)?.toLowerCase()?.includes(targetItem.toLowerCase()));
+    
+    if (itemSlot !== -1 && itemSlot <= 7) {
+      sendMsg(`&aSwapping to item: &6${targetItem}`);
+      Player.setHeldItemIndex(itemSlot);
+      return;
+    }
+  }
+  
+  if (itemsToSwap.length === 1) sendMsg(`&cUnable to find &6${itemsToSwap[0]}&c in your hotbar`);
+  else sendMsg(`&cUnable to find any of &6${itemsToSwap.join(', ')}&c in your hotbar`);
+}
 
 export function rotateSmoothly(yaw, pitch, time) {
   while (yaw >= 180) yaw -= 360;

@@ -1,7 +1,8 @@
-import { EntityArmorStand, rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
-import config from "../../config";
-import Location from "../../../tska/skyblock/Location";
+import { rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
+import { EntityArmorStand } from "../../../BloomCore/utils/Utils";
 import { scheduleTask } from "../../../tska/shared/ServerTick";
+import Location from "../../../tska/skyblock/Location";
+import config from "../../config";
 
 /**
  * why dudechill.js wtf pls

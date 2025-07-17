@@ -1,4 +1,5 @@
-import { rotateSmoothly, doJump, leftClick, sendMsg, setSneakKey, C02PacketUseEntity, C07PacketPlayerDigging, sendDebugMsg } from "../../utils/utils";
+import { rotateSmoothly, doJump, leftClick, sendMsg, setSneakKey, C07PacketPlayerDigging, sendDebugMsg } from "../../utils/utils";
+import { C02PacketUseEntity } from "../../../BloomCore/utils/Utils";
 import serverRotations from "../../utils/serverRotations";
 import config from "../../config";
 
