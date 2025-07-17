@@ -1,18 +1,14 @@
-import { registerWhen, sendDebugMsg,swapToItem } from "../../utils/utils";
+import {sendDebugMsg,swapToItem } from "../../utils/utils";
 import { rightClick } from "../../utils/utils";
-
-let tickCounter = 0;
-
 import config from "../../config";
-registerWhen(register("tick", () => {
+import Location from "../../../tska/skyblock/Location"
 
-  tickCounter++;
-  if (tickCounter % 10 !== 0) return;
-
+const Automelon = register("step", () => {
+  if (!config.automelon) return;
   const lastitem = Player.getHeldItemIndex();
   let HP = Player.getHP();
-
-  if (HP < 9) {
+  const maxHP = Player.asPlayerMP()?.getMaxHP()
+  if (HP < maxHP * config.HPThreshold) {
     swapToItem("healing melon");
     Client.scheduleTask(2, () => rightClick());
     Client.scheduleTask(3, () => {
@@ -20,4 +16,9 @@ registerWhen(register("tick", () => {
       sendDebugMsg("Auto melon complete");
     });
   }
-}), () => config.automelon);
+}).setDelay(0.5).unregister();
+
+Location.onWorldChange((world)=> {
+  if (world === "the rift") Automelon.register()
+  else Automelon.unregister()
+})

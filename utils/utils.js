@@ -14,10 +14,14 @@ export const Jump = new KeyBind(Client.getMinecraft().field_71474_y.field_74314_
 export const KeyBinding = Java.type("net.minecraft.client.settings.KeyBinding");
 export const sendMsg = (msg) => ChatLib.chat(prefix + msg);
 export const debugPrefix = "§f[§aDEBUG§f] §r"
-export const sendDebugMsg = (msg) => ChatLib.chat(debugPrefix + prefix + msg);
 export const C07PacketPlayerDigging = Java.type("net.minecraft.network.play.client.C07PacketPlayerDigging")
 export const EntityOtherPlayerMP = Java.type("net.minecraft.client.entity.EntityOtherPlayerMP")
 export const EntityArmorStand = Java.type("net.minecraft.entity.item.EntityArmorStand")
+
+export function sendDebugMsg(msg) {
+  if (!config.debugmode) return;
+  ChatLib.chat(debugPrefix + prefix + msg)
+}
 
 export function leftClick() {
   const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null);

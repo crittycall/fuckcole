@@ -1,8 +1,8 @@
-import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProperty, @SelectorProperty } from "Vigilance";
+import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProperty, @SelectorProperty, @DecimalSliderProperty } from "Vigilance";
 
 @Vigilant("Fuckcole", "§aFuckcole§r", {
     getCategoryComparator: () => (a, b) => {
-        const order = ["Settings", "Commands", "Slayer", "Debug"];
+        const order = ["Settings", "Commands", "Vampire Nuke", "Debug"];
         return order.indexOf(a.name) - order.indexOf(b.name);
     }
 
@@ -10,43 +10,28 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 
 class Config {
     ///// RIFTSTALKER /////
-      @SwitchProperty({
+     /* @SwitchProperty({
         name: "Vampire Nuke",
         description: "",
-        category: "Slayer",
+        category: "Vampire Nuke",
         subcategory: "Riftstalker"
     })
-    toggleVampireNuke = false;
+    toggleVampireNuke = false;*/
 
-    @SwitchProperty({
-        name: "Auto Holy Ice",
-        description: "",
-        category: "Slayer",
-        subcategory: "Riftstalker"
-    })
-    toggleIce = false;
-
-    @SwitchProperty({
-        name: "Auto Melon",
-        description: "",
-        category: "Slayer",
-        subcategory: "Riftstalker"
-    })
-    automelon = false;
 
     @SwitchProperty({
         name: "Auto Impel",
         description: "",
-        category: "Slayer",
-        subcategory: "Riftstalker"
+        category: "Vampire Nuke",
+        subcategory: "Auto Impel"
     })
     toggleImpel = false;
-    
+
     @SliderProperty({
         name: "Rotate Speed (in)",
         description: "Speed is in ms; does not apply to no rotate (lower ms = riskier)",
-        category: "Slayer",
-        subcategory: "Riftstalker",
+        category: "Vampire Nuke",
+        subcategory: "Auto Impel",
         min: 50,
         max: 500
     })
@@ -55,8 +40,8 @@ class Config {
      @SliderProperty({
         name: "Rotate Speed (out)",
         description: "Speed is in ms; does not apply to no rotate (lower ms = riskier)",
-        category: "Slayer",
-        subcategory: "Riftstalker",
+        category: "Vampire Nuke",
+        subcategory: "Auto Impel",
         min: 50,
         max: 500
     })
@@ -65,10 +50,35 @@ class Config {
     @SwitchProperty({
         name: "No Rotate",
         description: "Makes auto impel serversided (risky cuz crit can't code)",
-        category: "Slayer",
-        subcategory: "Riftstalker"
+        category: "Vampire Nuke",
+        subcategory: "Auto Impel"
     })
     noRotate = false;
+
+    @SwitchProperty({
+        name: "Auto Holy Ice",
+        description: "",
+        category: "Vampire Nuke",
+        subcategory: "Auto use Items"
+    })
+    toggleIce = false;
+
+    @SwitchProperty({
+        name: "Auto Melon",
+        description: "",
+        category: "Vampire Nuke",
+        subcategory: "Auto use Items"
+    })
+    automelon = false;
+
+    @DecimalSliderProperty({
+        name: "HP Threshold",
+        category: "Vampire Nuke",
+        subcategory: "Auto use Items",
+        minF: 0.10,
+        maxF: 0.9
+    })
+    HPThreshold = 0.3;
 
 
     ///// SETTINGS /////
@@ -115,12 +125,11 @@ class Config {
     
     constructor() {
         this.initialize(this);
-        this.addDependency("Auto Impel", "Vampire Nuke")
+        this.addDependency("Rotate Speed (in)", "Auto Impel");
+        this.addDependency("Rotate Speed (out)", "Auto Impel");
         this.addDependency("No Rotate", "Auto Impel");
-        this.addDependency("Rotate Speed (in)", "Auto Impel")
-        this.addDependency("Rotate Speed (out)", "Auto Impel")
-        this.addDependency("Auto Melon", "Vampire Nuke")
-        this.addDependency("Auto Holy Ice", "Vampire Nuke")
+        this.addDependency("HP Threshold", "Auto Melon")
+
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
 
     }

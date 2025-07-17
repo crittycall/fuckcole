@@ -7,6 +7,7 @@ import "./commands/boom"
 import "./commands/debug"
 import "./features/Riftstalker/Melons"
 
+
 register("command", () => config.openGUI()).setName("fuckcole").setAliases(["fc", "cole"]);
 register("gameLoad", () => sendMsg("&aIt didnt fail loading ggwp"));
 register("serverConnect", () => Client.scheduleTask(20, () => sendMsg("Make sure to run '/boom' and '/showme'!")))

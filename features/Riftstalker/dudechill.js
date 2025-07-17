@@ -1,6 +1,6 @@
 import {EntityArmorStand, rightClick, sendDebugMsg, sendMsg, swapToItem } from "../../utils/utils";
 import config from "../../config";
-
+import Location from "../../../tska/skyblock/Location";
 //const debug = (config.debugmode)
 /**
  * why dudechill.js wtf pls
@@ -8,7 +8,7 @@ import config from "../../config";
 
 let lastTwinclawsTimer = null;
 
-register("step", () => {
+const autoiceregister = register("step", () => {
     const entities = World.getAllEntitiesOfType(EntityArmorStand);
     const playerName = Player.getName();
     let bloodfiendPos = null;
@@ -63,7 +63,7 @@ register("step", () => {
     } else {
         //sendDebugMsg("Could not find both TWINCLAWS and player armor stand for distance calculation");
     }
-}).setDelay(0.15);
+}).setDelay(0.15).unregister();
 
 function autoIce() {
   const lastitem = Player.getHeldItemIndex();
@@ -76,6 +76,10 @@ function autoIce() {
   });
 }
 
+Location.onWorldChange((world)=> {
+  if (world === "the rift") autoiceregister.register()
+  else autoiceregister.unregister()
+})
 /**
  * Stop using schizo keybinds to test your stuff
  */
