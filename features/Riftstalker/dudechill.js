@@ -21,7 +21,7 @@ const autoiceregister = register("step", () => {
   entities.forEach((entity) => {
     const formattedName = ChatLib.removeFormatting(entity.getName());
 
-    if (formattedName.includes("Bloodfiend")) bloodfiendPos = entity.getPos();
+    if (formattedName.includes(playerName)) bloodfiendPos = entity.getPos();
     if (formattedName.includes("TWINCLAWS")) {
       twinclawsPos = entity.getPos();
 

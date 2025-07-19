@@ -16,7 +16,7 @@ const Automelon = register("step", () => {
       sendDebugMsg("Auto melon complete");
     });
   }
-}).setDelay(0.5).unregister();
+}).setDelay(0.2).unregister();
 
 Location.onWorldChange((world) => {
   if (world === "the rift") Automelon.register();
