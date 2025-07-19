@@ -49,8 +49,8 @@ const autoiceregister = register("step", () => {
 function autoIce() {
   const lastitem = Player.getHeldItemIndex();
   swapToItemID("HOLY_ICE");
-  scheduleTask(() => rightClick(), 1);
-  scheduleTask(() => Player.setHeldItemIndex(lastitem), 2);
+  scheduleTask(() => rightClick(), 2);
+  scheduleTask(() => Player.setHeldItemIndex(lastitem), 3);
 }
 
 Location.onWorldChange((world) => {
