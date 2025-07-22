@@ -71,6 +71,13 @@ class Config {
     })
     HPThreshold = 0.3;
 
+    @SwitchProperty({
+        name: "Auto Tuba",
+        description: "",
+        category: "Vampire Nuke",
+        subcategory: "Auto use Items"
+    })
+    autotuba = false;
 
     ///// SETTINGS /////
     @SwitchProperty({
@@ -113,6 +120,14 @@ class Config {
         subcategory: "Debug"
     })
     debugmode = false;
+
+     @SwitchProperty({
+        name: "Send dig packet on click down",
+        category: "Debug",
+        subcategory: "Debug"
+    })
+    senddigpacket = false;
+    
     
     constructor() {
         this.initialize(this);

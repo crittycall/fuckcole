@@ -6,6 +6,7 @@ import "./commands/showme"
 import "./commands/boom"
 import "./commands/debug"
 import "./features/Riftstalker/Melons"
+import "./features/Riftstalker/Stake"
 
 register("command", () => config.openGUI()).setName("fuckcole").setAliases(["fc", "cole"]);
 register("gameLoad", () => sendMsg("&aIt didnt fail loading ggwp"));

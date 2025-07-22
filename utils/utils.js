@@ -4,6 +4,7 @@
  * This is so schizo omg pls kill me crit
  */
 import { getSkyblockItemID } from "../../BloomCore/utils/Utils";
+import { scheduleTask } from "../../tska/shared/ServerTick";
 import config from "../config";
 
 export const bezier = (t, initial, p1, p2, final) => (1 - t) * (1 - t) * (1 - t) * initial + 3 * (1 - t) * (1 - t) * t * p1 + 3 * (1 - t) * t * t * p2 + t * t * t * final;
@@ -117,3 +118,17 @@ register("gameLoad", () => setRegisters());
 register("guiClosed", (gui) => {
   if (gui instanceof SettingsGui) setRegisters();
 });
+
+export function DIGGER(x, y, z) {
+   Client.sendPacket(new net.minecraft.network.play.client.C07PacketPlayerDigging(
+        net.minecraft.network.play.client.C07PacketPlayerDigging.Action.START_DESTROY_BLOCK,
+        new net.minecraft.util.BlockPos(x, y, z),
+        net.minecraft.util.EnumFacing.DOWN
+    ));
+  Client.scheduleTask(2,()=>  
+    Client.sendPacket(new net.minecraft.network.play.client.C07PacketPlayerDigging(
+        net.minecraft.network.play.client.C07PacketPlayerDigging.Action.ABORT_DESTROY_BLOCK,
+        new net.minecraft.util.BlockPos(x, y, z),
+        net.minecraft.util.EnumFacing.DOWN
+    )));
+  };

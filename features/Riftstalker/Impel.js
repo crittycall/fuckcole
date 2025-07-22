@@ -1,4 +1,4 @@
-import { rotateSmoothly, doJump, leftClick, sendMsg, setSneakKey, C07PacketPlayerDigging, sendDebugMsg } from "../../utils/utils";
+import { rotateSmoothly, doJump, leftClick, sendMsg, setSneakKey, C07PacketPlayerDigging, sendDebugMsg, DIGGER } from "../../utils/utils";
 import { C02PacketUseEntity } from "../../../BloomCore/utils/Utils";
 import serverRotations from "../../utils/serverRotations";
 import config from "../../config";
@@ -43,7 +43,10 @@ register("packetReceived", (packet, event) => {
       });
     } else impelDoRotate(Player.getYaw(), -90);
   } else if (message.startsWith("Impel: CLICK DOWN")) {
-    if (config.noRotate) impelDontRotate(Player.getYaw(), 90);
+    if (config.noRotate) {
+      impelDontRotate(Player.getYaw(), 90);
+      if (config.senddigpacket){DIGGER(Math.floor(Player.getX()), Math.floor(Player.getY() - 0.1), Math.floor(Player.getZ()))
+      }}
     else impelDoRotate(Player.getYaw(), 90);
   } else if (message.startsWith("Impel: SNEAK")) {
     setSneakKey(true);
@@ -98,3 +101,8 @@ register("command", () => {
   if (config.debugmode) cancelDigPacket.register();
   else sendMsg("Debug mode not activated");
 }).setName("testdigpacket");
+
+register("command",() =>{
+DIGGER(Math.floor(Player.getX()), Math.floor(Player.getY() - 0.1), Math.floor(Player.getZ()))
+
+}).setName("digger")
