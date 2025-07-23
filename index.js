@@ -7,6 +7,8 @@ import "./commands/boom"
 import "./commands/debug"
 import "./features/Riftstalker/Melons"
 import "./features/Riftstalker/Stake"
+import "./features/Riftstalker/Tuba"
+// import "./features/Riftstalker/ItemSwapScheduler"
 
 register("command", () => config.openGUI()).setName("fuckcole").setAliases(["fc", "cole"]);
 register("gameLoad", () => sendMsg("&aIt didnt fail loading ggwp"));

@@ -106,3 +106,8 @@ register("command",() =>{
 DIGGER(Math.floor(Player.getX()), Math.floor(Player.getY() - 0.1), Math.floor(Player.getZ()))
 
 }).setName("digger")
+
+register("command",() =>{
+cancelDigPacket.register()
+
+}).setName("registerdigpacket")
