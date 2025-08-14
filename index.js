@@ -9,7 +9,7 @@ import "./features/Riftstalker/Melons"
 import "./features/Riftstalker/Stake"
 import "./features/Riftstalker/Tuba"
 // import "./features/Riftstalker/ItemSwapScheduler"
-
+import "./features/Demonlord/AutoAtune"
 register("command", () => config.openGUI()).setName("fuckcole").setAliases(["fc", "cole"]);
 register("gameLoad", () => sendMsg("&aIt didnt fail loading ggwp"));
 register("serverConnect", () => Client.scheduleTask(20, () => sendMsg("Make sure to run '/boom' and '/showme'!")))

@@ -2,7 +2,7 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 
 @Vigilant("Fuckcole", "§aFuckcole§r", {
     getCategoryComparator: () => (a, b) => {
-        const order = ["Settings", "Commands", "Vampire Nuke", "Debug"];
+        const order = ["Settings", "Commands", "Vampire Nuke", "Blaze Helper", "Debug"];
         return order.indexOf(a.name) - order.indexOf(b.name);
     }
 
@@ -78,6 +78,17 @@ class Config {
         subcategory: "Auto use Items"
     })
     autotuba = false;
+    
+    ///// DEMONLORD /////
+    @SwitchProperty({
+        name: "Auto Atune",
+        description: "",
+        category: "Blaze Helper",
+        //subcategory: ""
+    })
+    toggleAtune = false;
+
+
 
     ///// SETTINGS /////
     @SwitchProperty({

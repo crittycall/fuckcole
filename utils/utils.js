@@ -15,6 +15,10 @@ export const KeyBinding = Java.type("net.minecraft.client.settings.KeyBinding");
 export const sendMsg = (msg) => ChatLib.chat(prefix + msg);
 export const debugPrefix = "§f[§aDEBUG§f] §r";
 export const C07PacketPlayerDigging = Java.type("net.minecraft.network.play.client.C07PacketPlayerDigging");
+export const MathHelper = Java.type("net.minecraft.util.MathHelper");
+export const mc = Client.getMinecraft();
+export const Float = Java.type("java.lang.Float");
+export const PlayerControllerMP = Java.type("net.minecraft.client.multiplayer.PlayerControllerMP");
 
 export function sendDebugMsg(msg) {
   if (!config.debugmode) return;
