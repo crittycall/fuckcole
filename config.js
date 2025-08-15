@@ -2,7 +2,7 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 
 @Vigilant("Fuckcole", "§aFuckcole§r", {
     getCategoryComparator: () => (a, b) => {
-        const order = ["Settings", "Commands", "Vampire Nuke", "Blaze Helper", "Debug"];
+        const order = ["Settings", "Commands", "Vampire Nuke", "Blaze Helper", "Misc", "Debug"];
         return order.indexOf(a.name) - order.indexOf(b.name);
     }
 
@@ -84,11 +84,17 @@ class Config {
         name: "Auto Atune",
         description: "",
         category: "Blaze Helper",
-        //subcategory: ""
+        subcategory: "Automation"
     })
     toggleAtune = false;
-
-
+    ///// MISC /////
+    @SwitchProperty({
+        name: "Display Damage on Hud",
+        description: "",
+        category: "Misc",
+        subcategory: "Hud"
+    })
+    toggleBigDmgNumbers = false;
 
     ///// SETTINGS /////
     @SwitchProperty({
@@ -148,6 +154,8 @@ class Config {
         this.addDependency("HP Threshold", "Auto Melon")
 
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
+
+        
 
     }
 }

@@ -28,11 +28,13 @@ swapToItem("Diamond Sword")
 const helditem = Player.getHeldItem().getID()
 ChatLib.chat(helditem)
 McUtils.syncCurrentPlayItem()
+
 if (helditem == "276.0") {
-   scheduleTask(()=> McUtils.setRightClickDelayTimer(2), 1)
-    
-}
-}
+   scheduleTask(()=> Client.getMinecraft().field_71474_y.field_74313_G.field_74513_e = true, 1)
+   scheduleTask(()=> Client.getMinecraft().field_71474_y.field_74313_G.field_74513_e = false, 2)
+
+}}
+
 
 register("command",() => {
 ChatLib.chat(Player.getHeldItem().getItem())
