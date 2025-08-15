@@ -2,10 +2,7 @@
 import { EntityArmorStand } from "../../../BloomCore/utils/Utils";
 import { sendDebugMsg } from "../../utils/utils";
 
-register("command",()=> {
-    World.getAllEntities().forEach((entities)=> ChatLib.chat(entities.getName()))
-    //ChatLib.chat(entities)
-}).setName("getentities")
+
 
 register("command", () => {
     const entity = Player.lookingAt();

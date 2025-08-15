@@ -11,20 +11,20 @@ register("step", () => {
     if (Date.now() - lastUpdateTime > 750) {
         numberGUI.unregister(); 
         displayText = ""
+
     }
 }).setDelay(0.25)
 
 register("packetSent",() => {
     if (!config.toggleBigDmgNumbers) return numberGUI.unregister();
-    numberGUI.register();
     lastUpdateTime = Date.now()
-    const tags = World.getAllEntitiesOfType(EntityArmorStand);
+    numberGUI.register();
     scheduleTask(() => {
-        tags.forEach((entities) => {
+        World.getAllEntities().forEach((entities) => {
             if (!entities.getName().includes("✧")) return;
             displayText = entities.getName();
         });
-    }, 2);
+    }, 4);
 }).setFilteredClass(C02PacketUseEntity);
 
 
