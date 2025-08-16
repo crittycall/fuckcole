@@ -1,7 +1,12 @@
 import { EntityArmorStand, EntityEnderman } from "../../../BloomCore/utils/Utils"
 import { scheduleTask } from "../../../tska/shared/ServerTick";
-import { swapToItemID, keybinds, setKeyState,} from "../../utils/utils";
+import { swapToItemID, keybinds, setKeyState, rightClick,} from "../../utils/utils";
 import { McUtils } from "../../utils/mcUtils";
+
+let ashencd = false;
+let spiritcd = false;
+let auriccd = false;
+let crystalcd = false;
 
 
 register("command",()=> {
@@ -17,41 +22,66 @@ const playerName = Player.getName();
 entities.forEach((entity) => {
     const formattedName = ChatLib.removeFormatting(entity.getName())
     if (formattedName.includes(playerName)) BlazePos = entity.getPos()
-    if (formattedName.includes("ASHEN")) Ashen()
+    if (formattedName.includes("ASHEN" || !ashencd)) Ashen()
 })
 
 
 }).unregister
 
 function Ashen() {
-swapToItemID("HEARTFIRE_DAGGER")
-//swapToItem("Diamond Sword")
-const helditem = Player.getHeldItem().getID()
-ChatLib.chat(helditem)
-McUtils.syncCurrentPlayItem()
-
-if (helditem == "276.0") {
-  setKeyState(keybinds.leftClick, true)
-
+  spiritcd = false; auriccd = false; crystalcd = false;
+  if (ashencd == true) return;
+    ashencd = true
+    swapToItemID("FIRE")
+    const helditem = Player.getHeldItem().getID()
+    ChatLib.chat(helditem)
+  if (helditem == "283.0") {
+    Client.scheduleTask(2,()=> rightClick())
 }}
 
+function Spirit() {
+  ashencd = false; auriccd = false; crystalcd = false;
+  if (spiritcd == true) return;
+    spiritcd = true
+    swapToItemID("MAW")
+    const helditem = Player.getHeldItem().getID()
+    ChatLib.chat(helditem)
+  if (helditem == "276.0") {
+    Client.scheduleTask(2,()=> rightClick())
+}}
 
+function Auric() {
+  ashencd = false; spiritcd = false; crystalcd = false;
+  if (auriccd == true) return;
+    auriccd = true
+    swapToItemID("FIRE")
+    const helditem = Player.getHeldItem().getID()
+    ChatLib.chat(helditem)
+  if (helditem == "272.0") {
+    Client.scheduleTask(2,()=> rightClick())
+}}
+
+function Crystal() {
+  ashencd = false; spiritcd = false; auriccd = false;
+  if (crystalcd == true) return;
+    crystalcd = true
+    swapToItemID("MAW")
+    const helditem = Player.getHeldItem().getID()
+    ChatLib.chat(helditem)
+  if (helditem == "267.0") {
+    Client.scheduleTask(2,()=> rightClick())
+}}
 register("command",() => {
-ChatLib.chat(Player.getHeldItem().getItem())
+ChatLib.chat(Player.getHeldItem().getID())
 
 
 }).setName("helditem")
 
 register("command",() => {
 Ashen()
-
+scheduleTask(()=> Spirit(), 40)
+scheduleTask(()=> Auric(), 80)
+scheduleTask(()=> Crystal(), 120)
 
 }).setName("swap2sword")
 
-register("command",() => {
-scheduleTask(() => setKeyState(keybinds.forward, false), 20)
-
-
-}).setName("keystate")
-
-Client.getKeyBindFromKey(Keyboard.KEY_RIGHT)
