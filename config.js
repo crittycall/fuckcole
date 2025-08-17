@@ -46,6 +46,14 @@ class Config {
     })
     noRotate = false;
 
+     @SwitchProperty({
+        name: "Force Click Down",
+        description: "Makes you dig during click down; forces impel to complete",
+        category: "Vampire Nuke",
+        subcategory: "Auto Impel"
+    })
+    senddigpacket = false;
+
     @SwitchProperty({
         name: "Auto Holy Ice",
         description: "",
@@ -138,12 +146,7 @@ class Config {
     })
     debugmode = false;
 
-     @SwitchProperty({
-        name: "Send dig packet on click down",
-        category: "Debug",
-        subcategory: "Debug"
-    })
-    senddigpacket = false;
+    
     
     
     constructor() {
@@ -151,6 +154,7 @@ class Config {
         this.addDependency("Rotate Speed (in)", "Auto Impel");
         this.addDependency("Rotate Speed (out)", "Auto Impel");
         this.addDependency("No Rotate", "Auto Impel");
+        this.addDependency("Force Click Down", "Auto Impel")
         this.addDependency("HP Threshold", "Auto Melon")
 
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
