@@ -8,7 +8,6 @@ import "./commands/debug"
 import "./features/Riftstalker/Melons"
 import "./features/Riftstalker/Stake"
 import "./features/Riftstalker/Tuba"
-// import "./features/Riftstalker/ItemSwapScheduler"
 //import "./features/Demonlord/AutoAtune"
 import "./features/Misc/bigdmgnumbers"
 register("command", () => config.openGUI()).setName("fuckcole").setAliases(["fc", "cole"]);
