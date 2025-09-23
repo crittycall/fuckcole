@@ -88,8 +88,17 @@ class Config {
     })
     toggleAtune = false;
 
+<<<<<<< Updated upstream
 
 
+=======
+    @SwitchProperty({
+        name: "Auto Excuse",
+        category: "Misc"
+    })
+    toggleExcuse = false;
+    
+>>>>>>> Stashed changes
     ///// SETTINGS /////
     @SwitchProperty({
         name: "Toggle Custom Prefix",

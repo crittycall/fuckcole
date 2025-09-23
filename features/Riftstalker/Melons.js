@@ -10,8 +10,6 @@ const Automelon = register("step", () => {
   const maxHP = Player.asPlayerMP()?.getMaxHP()
   let HP = Player.getHP();
   if (HP < maxHP * config.HPThreshold) {
-    // if(!schedulecd == 0) return;
-    // schedulecd = schedulecd + 4
     swapToItemID("HEALING_MELON");
     Client.scheduleTask(2, () => rightClick());
     Client.scheduleTask(3, () => {
