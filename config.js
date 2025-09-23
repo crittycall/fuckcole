@@ -100,10 +100,14 @@ class Config {
         name: "Display Damage on Hud",
         description: "",
         category: "Misc",
-        subcategory: "Hud"
     })
     toggleBigDmgNumbers = false;
 
+    @SwitchProperty({
+        name: "Auto Excuse",
+        category: "Misc"
+    })
+    toggleExcuse = false;
     ///// SETTINGS /////
     @SwitchProperty({
         name: "Toggle Custom Prefix",

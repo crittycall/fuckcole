@@ -1,33 +1,38 @@
 // gamble responsibly
-import { EntityArmorStand } from "../../../BloomCore/utils/Utils";
-import { sendDebugMsg } from "../../utils/utils";
-
-
+import { EntityArmorStand } from "../../../../BloomCore/utils/Utils";
+import { sendDebugMsg } from "../../../utils/utils";
 
 register("command", () => {
-    const entity = Player.lookingAt();
-    
-    if (entity && entity.getEntity) {
-        ChatLib.chat(`Looking at:`);
-        ChatLib.chat(`Class: ${entity.getClassName()}`);
-        ChatLib.chat(`Name: ${entity.getName()}`);
-        ChatLib.chat(`Position: ${entity.getX().toFixed(1)}, ${entity.getY().toFixed(1)}, ${entity.getZ().toFixed(1)}`);
-        
-        // Check if it has a custom name
-        const customName = entity.getEntity().getCustomNameTag();
-        if (customName) {
-            ChatLib.chat(`Custom name: ${customName}`);
-        }
-        
-        // Get health if it's a living entity
-        if (entity.getEntity().getHealth) {
-            ChatLib.chat(`Health: ${entity.getEntity().getHealth()}/${entity.getEntity().getMaxHealth()}`);
-        }
-    } else {
-        ChatLib.chat("Not looking at an entity");
-    }
-}).setName("entityinfo");
+  const entity = Player.lookingAt();
 
+  if (entity && entity.getEntity) {
+    ChatLib.chat(`Looking at:`);
+    ChatLib.chat(`Class: ${entity.getClassName()}`);
+    ChatLib.chat(`Name: ${entity.getName()}`);
+    ChatLib.chat(
+      `Position: ${entity.getX().toFixed(1)}, ${entity
+        .getY()
+        .toFixed(1)}, ${entity.getZ().toFixed(1)}`
+    );
+
+    // Check if it has a custom name
+    const customName = entity.getEntity().getCustomNameTag();
+    if (customName) {
+      ChatLib.chat(`Custom name: ${customName}`);
+    }
+
+    // Get health if it's a living entity
+    if (entity.getEntity().getHealth) {
+      ChatLib.chat(
+        `Health: ${entity.getEntity().getHealth()}/${entity
+          .getEntity()
+          .getMaxHealth()}`
+      );
+    }
+  } else {
+    ChatLib.chat("Not looking at an entity");
+  }
+}).setName("entityinfo");
 
 let tickCount = 0;
 
@@ -95,16 +100,14 @@ let tickCount = 0;
     }
   )}).setDelay(0.15)*/
 
-  register("tick",()=> {
-    const entities = World.getAllEntitiesOfType(EntityArmorStand);
-    const playerName = Player.getName();
-    let bloodfiendPos = null;
-    let stakePos = null;
-    
-    entities.forEach((entity)=> {
-      const formattedName = ChatLib.removeFormatting(entity.getName());  
-      if (formattedName.includes(playerName)) bloodfiendPos = entity.getPos();
-      
+register("tick", () => {
+  const entities = World.getAllEntitiesOfType(EntityArmorStand);
+  const playerName = Player.getName();
+  let bloodfiendPos = null;
+  let stakePos = null;
 
-    })
-})
+  entities.forEach((entity) => {
+    const formattedName = ChatLib.removeFormatting(entity.getName());
+    if (formattedName.includes(playerName)) bloodfiendPos = entity.getPos();
+  });
+});
