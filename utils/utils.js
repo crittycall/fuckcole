@@ -4,7 +4,6 @@
  * This is so schizo omg pls kill me crit
  */
 import { getSkyblockItemID } from "../../BloomCore/utils/Utils";
-import { scheduleTask } from "../../tska/shared/ServerTick";
 import config from "../config";
 
 export const bezier = (t, initial, p1, p2, final) =>

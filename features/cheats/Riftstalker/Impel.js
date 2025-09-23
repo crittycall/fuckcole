@@ -62,11 +62,12 @@ function impelDoRotate(yaw, pitch) {
   sendDebugMsg("§bAutoimpel: §l§acomplete");
 }
 
-function impelDontRotate(yaw, pitch) {
+function impelDontRotate(yaw, pitch, dig = false) {
   serverRotations.setRotation(yaw, pitch, () => {
     cancelHitPacket.register();
     sendDebugMsg("registered cancel hit packet");
     leftClick();
+    if (dig == true) DIGGER(blockBelow[0], blockBelow[1], blockBelow[2]);
     Client.scheduleTask(0, () => {
       serverRotations.resetRotation();
       sendDebugMsg("§bAutoimpel: §l§acomplete");
@@ -96,8 +97,9 @@ function clickImpel(direction) {
         break;
       // Clicks down and sends dig packet, dig packet is required for click down impel to complete. //
       case "down":
-        impelDontRotate(Player.getYaw(), 90);
-        DIGGER(blockBelow[0], blockBelow[1], blockBelow[2]);
+        impelDontRotate(Player.getYaw(), 90, true);
+        sendDebugMsg("digged down fuck u");
+        break;
     }
   }
 }

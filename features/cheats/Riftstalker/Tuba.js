@@ -15,10 +15,11 @@ Location.onWorldChange((world) => {
 
 let cooldown = 500;
 const cooldownmanager = register("tick", () => {
-  if (!Player.getContainer().isContainer()) if (!config.autotuba) return;
-  if (!cooldown == 0) {
+  if (Client.isInGui() || Player.getContainer()?.getName() !== "container")
+    return;
+  if (!config.autotuba) return;
+  if (cooldown > 0) {
     cooldown--;
-    // sendDebugMsg(cooldown);
   }
   UseTuba();
 }).unregister();
