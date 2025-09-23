@@ -2,7 +2,7 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
 
 @Vigilant("Fuckcole", "§aFuckcole§r", {
     getCategoryComparator: () => (a, b) => {
-        const order = ["Settings", "Commands", "Vampire Nuke", "Blaze Helper", "Debug"];
+        const order = ["Settings", "Commands", "Vampire Nuke", "Blaze Helper", "Misc", "Debug"];
         return order.indexOf(a.name) - order.indexOf(b.name);
     }
 
@@ -46,6 +46,14 @@ class Config {
     })
     noRotate = false;
 
+     @SwitchProperty({
+        name: "Force Click Down",
+        description: "Makes you dig during click down; forces impel to complete",
+        category: "Vampire Nuke",
+        subcategory: "Auto Impel"
+    })
+    senddigpacket = false;
+
     @SwitchProperty({
         name: "Auto Holy Ice",
         description: "",
@@ -84,21 +92,22 @@ class Config {
         name: "Auto Atune",
         description: "",
         category: "Blaze Helper",
-        //subcategory: ""
+        subcategory: "Automation"
     })
     toggleAtune = false;
+    ///// MISC /////
+    @SwitchProperty({
+        name: "Display Damage on Hud",
+        description: "",
+        category: "Misc",
+    })
+    toggleBigDmgNumbers = false;
 
-<<<<<<< Updated upstream
-
-
-=======
     @SwitchProperty({
         name: "Auto Excuse",
         category: "Misc"
     })
     toggleExcuse = false;
-    
->>>>>>> Stashed changes
     ///// SETTINGS /////
     @SwitchProperty({
         name: "Toggle Custom Prefix",
@@ -141,12 +150,7 @@ class Config {
     })
     debugmode = false;
 
-     @SwitchProperty({
-        name: "Send dig packet on click down",
-        category: "Debug",
-        subcategory: "Debug"
-    })
-    senddigpacket = false;
+    
     
     
     constructor() {
@@ -154,9 +158,12 @@ class Config {
         this.addDependency("Rotate Speed (in)", "Auto Impel");
         this.addDependency("Rotate Speed (out)", "Auto Impel");
         this.addDependency("No Rotate", "Auto Impel");
+        this.addDependency("Force Click Down", "Auto Impel")
         this.addDependency("HP Threshold", "Auto Melon")
 
         this.addDependency("Custom Prefix Text", "Toggle Custom Prefix")
+
+        
 
     }
 }

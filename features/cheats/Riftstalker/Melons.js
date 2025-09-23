@@ -1,13 +1,13 @@
-import { sendDebugMsg, swapToItemID } from "../../utils/utils";
-import { rightClick } from "../../utils/utils";
-import config from "../../config";
-import Location from "../../../tska/skyblock/Location";
+import { sendDebugMsg, swapToItemID } from "../../../utils/utils";
+import { rightClick } from "../../../utils/utils";
+import config from "../../../config";
+import Location from "../../../../tska/skyblock/Location";
 // import { schedulecd } from "./ItemSwapScheduler";
 
 const Automelon = register("step", () => {
   if (!config.automelon) return;
   const lastitem = Player.getHeldItemIndex();
-  const maxHP = Player.asPlayerMP()?.getMaxHP()
+  const maxHP = Player.asPlayerMP()?.getMaxHP();
   let HP = Player.getHP();
   if (HP < maxHP * config.HPThreshold) {
     swapToItemID("HEALING_MELON");
@@ -17,7 +17,9 @@ const Automelon = register("step", () => {
       sendDebugMsg("Auto melon complete");
     });
   }
-}).setDelay(0.2).unregister();
+})
+  .setDelay(0.2)
+  .unregister();
 
 Location.onWorldChange((world) => {
   if (world === "the rift") Automelon.register();
