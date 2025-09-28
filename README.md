@@ -7,4 +7,5 @@ critty call air ror
 this is too schizo pls unschizo this thank you
 
 ## Planned Feature:
-- Rat (extremly important)
+- make it better idk
+- nuke jcnlk
