@@ -7,6 +7,7 @@ import { @Vigilant, @SwitchProperty, @TextProperty, @SliderProperty, @ButtonProp
     }
 
 }) // schizo color sooo cool ik
+// nuke jcnlk ^
 
 class Config {
     ///// RIFTSTALKER /////
@@ -40,7 +41,7 @@ class Config {
 
     @SwitchProperty({
         name: "No Rotate",
-        description: "Makes auto impel serversided (risky cuz crit can't code)",
+        description: "Makes auto impel serversided; looks megasus but ur gonna get fucked if spectated anyways!!",
         category: "Vampire Nuke",
         subcategory: "Auto Impel"
     })
@@ -88,13 +89,13 @@ class Config {
     autotuba = false;
     
     ///// DEMONLORD /////
-    @SwitchProperty({
+    /*@SwitchProperty({
         name: "Auto Atune",
         description: "",
         category: "Blaze Helper",
         subcategory: "Automation"
     })
-    toggleAtune = false;
+    toggleAtune = false;*/
     ///// MISC /////
     @SwitchProperty({
         name: "Display Damage on Hud",

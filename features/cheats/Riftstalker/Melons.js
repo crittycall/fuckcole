@@ -6,6 +6,8 @@ import Location from "../../../../tska/skyblock/Location";
 
 const Automelon = register("step", () => {
   if (!config.automelon) return;
+  if (Client.isInGui() || Player.getContainer()?.getName() !== "container")
+    return;
   const lastitem = Player.getHeldItemIndex();
   const maxHP = Player.asPlayerMP()?.getMaxHP();
   let HP = Player.getHP();
